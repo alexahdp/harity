@@ -1,0 +1,18 @@
+{
+  "name": "harity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "cd ./backend && npm run lint && cd ../frontend && npm run lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "pre-commit": "npm run lint"
+  },
+  "author": "alexahdp",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^0.14.3"
+  }
+}
