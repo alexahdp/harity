@@ -7,7 +7,7 @@ export default {
     ctx.body = {msg: 'Success'};
   },
 
-  async authBridge(ctx:any, next:func) {
+  async authBridge(ctx:any, next:any) {
     if (ctx.session.userId) {
       const user = await User.findOne({_id: ctx.session.userId}).exec();
       if (user !== null) {
@@ -19,7 +19,7 @@ export default {
 
     ctx.status = 403;
     ctx.body = 'Access denied';
-  }
+  },
 
   async signIn(ctx:any) {
     const user = await User.findOne({email: ctx.request.body.email}).exec();

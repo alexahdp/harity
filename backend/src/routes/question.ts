@@ -1,7 +1,7 @@
 import Question from '../model/question.ts';
 
 export default {
-  async create(ctx) {
+  async create(ctx:any) {
     const question = new Question({
       text: ctx.request.body.text,
       labels: ctx.request.body.labels,
@@ -14,7 +14,7 @@ export default {
     ctx.body = question;
   },
 
-  async read(ctx) {
+  async read(ctx:any) {
     const question = await Question.findOne({_id: ctx.params.questionId}).exec();
     if (question === null) {
       ctx.status = 404;
@@ -24,7 +24,7 @@ export default {
     ctx.body = question;
   },
 
-  async update(ctx) {
+  async update(ctx:any) {
     const question = await Question.findOne({_id: ctx.params.questionId}).exec();
     if (question === null) {
       ctx.status = 404;
@@ -40,7 +40,7 @@ export default {
     ctx.body = question;
   },
 
-  async remove(ctx) {
+  async remove(ctx:any) {
     const question = await Question.findOne({_id: ctx.params.questionId}).exec();
     if (question === null) {
       ctx.status = 404;
@@ -51,12 +51,12 @@ export default {
     ctx.body = {success: true};
   },
 
-  async list(ctx) {
+  async list(ctx:any) {
     const questions = await Question.find().exec();
     ctx.body = questions;
   },
 
-  async tagList(ctx) {
+  async tagList(ctx:any) {
     ctx.body = Question.getTagList();
   },
 };

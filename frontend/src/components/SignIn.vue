@@ -4,7 +4,6 @@
       <div class="col-md-4">
         <h3>Sign In</h3>
         <form
-          :user="user"
           v-on:submit.prevent="onSubmit()"
         >
           <div class="form-group">
@@ -43,7 +42,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('signIn', {
+      this.$store.dispatch('auth/signIn', {
         email: this.email,
         password: this.password,
       });

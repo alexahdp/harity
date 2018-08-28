@@ -9,11 +9,13 @@ const localState = {
   tagList: [],
 };
 
+
 const getters = {
   currentQuestion: () => localState.currentQuestion,
   questionList: () => localState.questionList,
   tagList: () => localState.tagList,
 };
+
 
 const actions = {
   async fetchQuestions(context) {
@@ -38,6 +40,7 @@ const actions = {
     } else {
       context.commit('onAddQuestion', { question: savedQuestion });
     }
+    context.commit('unsetCurrent');
   },
 
   async editQuestion(context, questionId) {
@@ -52,6 +55,7 @@ const actions = {
     context.commit('unsetCurrent');
   },
 };
+
 
 const mutations = {
   onFetchQuestions(state, payload) {
