@@ -14,15 +14,23 @@ class App extends Component {
 
   render() {
     return (
-      <Grid container spasing={24} justify="center">
-        <Grid item xs={4}>
+      <Grid container spasing={32} justify="space-evenly">
+        <Grid item xs={3}>
           <h2>Add Question</h2>
-          <QuestionForm addQuestion={this.addQuestion} />
+          <QuestionForm
+            editQuestion={this.props.editQuestion}
+            addQuestion={this.addQuestion}
+            updateQuestion={this.updateQuestion}
+          />
         </Grid>
 
         <Grid item xs={4}>
           <h2>Questions List</h2>
-          <QuestionList questions={this.props.questions} />
+          <QuestionList
+            questions={this.props.questions}
+            editHandle={this.props.setEditQuestion}
+            removeHandle={this.props.removeQuestion}
+          />
         </Grid>
       </Grid>
     );

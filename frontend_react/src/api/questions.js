@@ -44,6 +44,7 @@ export default {
   },
 
   async remove(questionId) {
+    return;
     await axios.delete(`/api/question/${questionId}`);
   },
 };
