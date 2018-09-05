@@ -23,9 +23,10 @@
           <el-table-column
            fixed="right"
            label="operations"
-           width="120"
+           width="160"
           >
            <template slot-scope="scope">
+             <el-button @click="handleOpen(scope)" type="text" size="small">Details</el-button>
              <el-button @click="handleEdit(scope)" type="text" size="small">Edit</el-button>
              <el-button @click="handleRemove(scope)" type="text" size="small">Remove</el-button>
           </template>
@@ -59,8 +60,8 @@ export default {
   },
 
   methods: {
-    open() {
-
+    handleOpen({ row }) {
+      this.$store.dispatch('interviewPlan/preview', { _id: row._id });
     },
     handleEdit({ row }) {
       this.$store.dispatch('interviewPlan/edit', { _id: row._id });

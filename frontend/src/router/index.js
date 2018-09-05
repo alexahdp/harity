@@ -4,7 +4,9 @@ import SignIn from '@/components/SignIn';
 import SignUp from '@/components/SignUp';
 import Dashboard from '@/components/Dashboard';
 import Questions from '@/components/questions';
-import InterviewPlan from '@/components/InterviewPlan';
+import InterviewPlanEdit from '@/components/InterviewPlanEdit';
+import InterviewPlanPreview from '@/components/InterviewPlanPreview';
+
 import InterviewPlanList from '@/components/InterviewPlanList';
 
 Vue.use(Router);
@@ -39,12 +41,17 @@ export default new Router({
     {
       path: '/interviewPlan',
       name: 'InterviewPlan',
-      component: InterviewPlan,
+      component: InterviewPlanEdit,
     },
     {
       path: '/interviewPlan/:id',
       name: 'EditInterviewPlan',
-      component: InterviewPlan,
+      component: InterviewPlanEdit,
+    },
+    {
+      path: '/interviewPlanPreview/:id',
+      name: 'PreviewInterviewPlan',
+      component: InterviewPlanPreview,
     },
     {
       path: '/interviewPlanList',

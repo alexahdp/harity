@@ -22,7 +22,7 @@
         :titles="['Backlog', 'For interview']"
         :data="questions"
         style="width: 1200px"
-        v-model="interviewPlan.questions"
+        v-model="interviewPlan.questionsId"
         filterable
       />
 

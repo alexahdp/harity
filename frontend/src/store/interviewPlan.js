@@ -42,7 +42,7 @@ const actions = {
 
     const savedInterviewPlan = await api.save(interviewPlan);
 
-    savedInterviewPlan.questions = savedInterviewPlan.questions.map(q => q._id);
+    savedInterviewPlan.questionsId = savedInterviewPlan.questions.map(q => q._id);
 
     context.commit('save', savedInterviewPlan);
     router.replace(`/interviewPlan/${savedInterviewPlan._id}`);
@@ -58,8 +58,12 @@ const actions = {
   },
 
   async get(context, payload) {
+    if (localState.interviewPlan && localState.interviewPlan._id === payload._id) {
+      return;
+    }
+
     const interviewPlan = await api.get(payload._id);
-    interviewPlan.questions = interviewPlan.questions.map(q => q._id);
+    interviewPlan.questionsId = interviewPlan.questions.map(q => q._id);
     context.commit('setCurrentInterviewPlan', interviewPlan);
   },
 
@@ -69,6 +73,12 @@ const actions = {
       title: '',
       questions: [],
     });
+  },
+
+  async preview(context, payload) {
+    const interviewPlan = localState.list.find(plan => plan._id === payload._id);
+    context.commit('setCurrentInterviewPlan', interviewPlan);
+    router.push(`/interviewPlanPreview/${payload._id}`);
   },
 };
 

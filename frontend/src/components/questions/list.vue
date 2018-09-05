@@ -1,11 +1,48 @@
+<template>
+<el-table
+  :data="this.questionList"
+  style="width: 100%"
+>
+  <el-table-column
+    prop="text"
+    label="Text"
+  />
+
+  <el-table-column
+    label="Labels"
+    with="100"
+    prop="labels"
+    :filters="tags"
+    :filter-method="filterTag"
+    filter-placement="bottom-end"
+  >
+    <template slot-scope="scope">
+      <el-tag
+        v-for="tag in scope.row.labels"
+        :key="tag.text"
+        disable-transitions
+      >
+        {{tag.text}}
+      </el-tag>
+    </template>
+  </el-table-column>
+
+  <el-table-column
+    fixed="right"
+    label="operations"
+    width="160"
+  >
+    <template slot-scope="scope">
+      <el-button @click="onEdit(scope.row._id)" type="text" size="small">Edit</el-button>
+      <el-button @click="onRemove(scope.row._id)" type="text" size="small">Remove</el-button>
+    </template>
+  </el-table-column>
+
+</el-table>
+</template>
+
 <script>
 import Vue from 'vue';
-import draggable from 'vuedraggable';
-
-// https://github.com/SortableJS/Vue.Draggable
-
-// USE IT!!!!!!
-// http://element.eleme.io/
 
 export default Vue.component('question-list', {
   props: {
@@ -15,8 +52,15 @@ export default Vue.component('question-list', {
     },
   },
 
-  components: {
-    draggable,
+  computed: {
+    tags() {
+      const uniqTags = new Set();
+      this.questionList.forEach(question => {
+        question.labels.forEach(label => uniqTags.add(label.text));
+      });
+
+      return Array.from(uniqTags).map(v => ({text: v, value: v}));
+    },
   },
 
   methods: {
@@ -26,47 +70,9 @@ export default Vue.component('question-list', {
     onEdit(questionId) {
       this.$store.dispatch('questions/editQuestion', questionId);
     },
-  },
-
-  render() {
-    return (
-      <ul>
-        <draggable>
-          {this.questionList.map(question => (
-            <li key={question._id} class="list-group-item">
-              <div class="text-right">
-                {question.labels.map(label => (
-                  <span
-                    class="badge badge-success"
-                    key={label.text}
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
-
-              <p class="text-left">{question.text}</p>
-
-              <div class="text-right">
-                <span
-                  onClick={() => this.onEdit(question._id)}
-                  class="badge badge-primary badge-pill book-close-btn"
-                >
-                  edit
-                </span>
-
-                <span
-                  onClick={() => this.onRemove(question._id)}
-                  class="badge badge-primary badge-pill book-close-btn"
-                >
-                  remove
-                </span>
-              </div>
-            </li>
-          ))}
-        </draggable>
-      </ul>
-    );
+    filterTag(tag, row) {
+      return row.labels.some(label => label.text === tag);
+    },
   },
 });
 </script>

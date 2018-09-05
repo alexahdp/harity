@@ -3,20 +3,43 @@
     :currentQuestion="currentQuestion"
     v-on:submit.prevent="onSubmit(currentQuestion)"
   >
+    <el-select
+      v-model="tags"
+      multiple
+      filterable
+      placeholder="Choose labels"
+    >
+      <el-option
+        v-for="item in tagList"
+        :key="item.text"
+        :value="item.text"
+        :label="item.text"
+      >
+      </el-option>
+    </el-select>
 
-    <VueTagsInput
+    <!-- <VueTagsInput
       v-model="tag"
       v-bind:tags="currentQuestion.labels"
       :autocomplete-items="filteredItems"
       @tags-changed="newTags => currentQuestion.labels = newTags"
-    />
+    /> -->
 
     <div class="form-group">
-      <textarea
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 4, maxRows: 8}"
+        placeholder="Please input"
+        v-model="currentQuestion.text">
+      </el-input>
+
+      <!-- <textarea
         class="form-control"
         rows="3"
         v-model="currentQuestion.text"
-      ></textarea>
+      ></textarea> -->
+
+
     </div>
 
     <div class="form-group">
@@ -53,6 +76,7 @@ export default Vue.component('question-form', {
 
   methods: {
     onSubmit(currentQuestion) {
+      currentQuestion.labels = this.tags.map(tag => ({ text: tag }));
       this.$store.dispatch('questions/saveQuestion', currentQuestion);
     },
     onCancel() {
@@ -62,7 +86,7 @@ export default Vue.component('question-form', {
 
   data() {
     return {
-      tag: '',
+      tags: '',
     };
   },
 });
