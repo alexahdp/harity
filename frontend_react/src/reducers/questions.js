@@ -1,7 +1,6 @@
-import { combineReducers } from 'redux-immutable';
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
-import { actions } from './actions/questions';
+import { actions } from '../actions/questions';
 
 const questions = handleActions({
   [actions.QUESTIONS_FETCHED](state, action) {
@@ -56,7 +55,4 @@ Immutable.fromJS({
 }),
 );
 
-export default combineReducers({
-  app: state => state || { name: 'Alex' },
-  questions
-});
+export default questions;

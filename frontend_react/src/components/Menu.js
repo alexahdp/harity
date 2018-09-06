@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import { withRouter } from "react-router-dom";
 const classes = {};
 const ITEM_HEIGHT = 48;
 
@@ -29,6 +29,15 @@ class App extends Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+
+    const InterviewPlanListLink = withRouter(({ history }) => (
+      <Button
+        color="inherit"
+        onClick={() => history.push('/interviewPlanList')}
+      >
+        Login
+      </Button>
+    ));
 
     return (
         <AppBar position="static">
@@ -75,8 +84,9 @@ class App extends Component {
               News
             </Typography>
 
-            <Button color="inherit">Main</Button>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit"><Link to="/interviewPlanList">interviewPlanList</Link></Button>
+
+            <InterviewPlanListLink />
           </Toolbar>
         </AppBar>
     );

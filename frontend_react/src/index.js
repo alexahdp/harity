@@ -19,6 +19,7 @@ import reducer from './reducers';
 import sagas from './sagas';
 import App from './components/App';
 import Dashboard from './components/Dashboard';
+import InterviewPlanList from './containers/interviewPlanList';
 import Questions from './containers/questions';
 import Menu from './components/Menu';
 
@@ -44,7 +45,7 @@ ReactDOM.render(
         <Route path="/" exact component={App} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/questions" component={Questions} />
-
+        <Route path="/interviewPlanList" component={InterviewPlanList} />
       </div>
     </Router>
   </Provider>,
