@@ -11,12 +11,15 @@ const interviewPlan = handleActions({
   },
 },
 Immutable.fromJS({
+  interviewPlan: {
+    createdAt: '',
+    description: '',
+    level: 0,
+    questions: [],
+    title: '',
+  },
   interviewPlanDialogIsOpened: false,
-  list: [{
-    _id: 'dcsf3',
-    title: 'Test plan',
-    createdAt: '2018-09-01',
-  }],
+  list: [],
 }));
 
 export default interviewPlan;

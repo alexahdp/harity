@@ -1,6 +1,6 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
-import ac, { actions } from './actions/questions';
-import api from './api/questions';
+import ac, { actions } from '../actions/questions';
+import api from '../api/questions';
 
 function* fetchQuestions() {
   const questions = yield call(api.fetch);

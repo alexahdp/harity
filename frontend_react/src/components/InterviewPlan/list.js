@@ -22,13 +22,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 class App extends React.PureComponent {
-  render() {
-    if (this.props.interviewPlanList.size === 0) {
-      return (
-        <h3>Список пуст</h3>
-      );
-    }
+  componentDidMount() {
+    this.props.fetchInterviewPlans();
+  }
 
+  render() {
     return (
       <Grid container spasing={32} justify="space-evenly">
         <Grid item xs={6}>
@@ -69,23 +67,27 @@ class App extends React.PureComponent {
             <AddIcon />
           </Button>
 
-          <List>
-            {this.props.interviewPlanList.map(interviewPlan => (
-              <ListItem className={styles.interviewPlanItem} key={interviewPlan.get('_id')}>
-                <ListItemText>
-                  <h3>{interviewPlan.get('title')}</h3>
-                </ListItemText>
-                <ListItemSecondaryAction>
-                  <IconButton>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton>
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
-          </List>
+          { (this.props.interviewPlanList.size === 0) ?
+            (<h3>Список пуст</h3>)
+            :
+            <List>
+              {this.props.interviewPlanList.map(interviewPlan => (
+                <ListItem className={styles.interviewPlanItem} key={interviewPlan.get('_id')}>
+                  <ListItemText>
+                    <h3>{interviewPlan.get('title')}</h3>
+                  </ListItemText>
+                  <ListItemSecondaryAction>
+                    <IconButton>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton>
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
+          }
           </Grid>
       </Grid>
     );
