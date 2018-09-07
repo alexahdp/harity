@@ -7,6 +7,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
 
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -27,6 +28,17 @@ class App extends React.PureComponent {
   }
 
   render() {
+    const InterviewPlanForm = withRouter(({ history }) => (
+      <Button
+        onClick={() => history.push('/interviewPlan')}
+        variant="fab"
+        color="secondary"
+        className={styles.fabClassName}
+      >
+        <AddIcon />
+      </Button>
+    ));
+
     return (
       <Grid container spasing={32} justify="space-evenly">
         <Grid item xs={6}>
@@ -58,14 +70,7 @@ class App extends React.PureComponent {
 
           </Dialog>
 
-          <Button
-            variant="fab"
-            color="secondary"
-            className={styles.fabClassName}
-            onClick={this.props.openInterviewPlanDialog}
-          >
-            <AddIcon />
-          </Button>
+          <InterviewPlanForm />
 
           { (this.props.interviewPlanList.size === 0) ?
             (<h3>Список пуст</h3>)
