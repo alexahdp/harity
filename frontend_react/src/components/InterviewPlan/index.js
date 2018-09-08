@@ -7,20 +7,20 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-
 class App extends PureComponent {
   componentDidMount() {
     this.props.fetchQuestions();
   }
 
-  render() {
-    const questionsMap = this.props.questions.reduce((o, question) => {
-      o[question.get('_id')] = question;
-      return o;
-    }, {});
+  componentWillReceiveProps(props) {
+    if (props.match.params.interviewPlanId !== props.interviewPlan.get('_id')) {
+      props.getInterviewPlan(props.match.params.interviewPlanId);
+    }
+  }
 
-    const selectedQuestionsMap = this.props.interviewPlan.get('questions').reduce((o, questionId) => {
-      o[questionId] = questionsMap[questionId];
+  render() {
+    const selectedQuestionsMap = this.props.interviewPlan.get('questions').reduce((o, question) => {
+      o[question.get('_id')] = question;
       return o;
     }, {});
 
@@ -64,7 +64,6 @@ class App extends PureComponent {
 
             <List>
               {this.props.interviewPlan.get('questions')
-                .map(questionId => selectedQuestionsMap[questionId])
                 .map(question => (
                   <ListItem key={question.get('_id')} divider={true}>
                     <ListItemText>

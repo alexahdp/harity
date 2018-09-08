@@ -4,7 +4,9 @@ import { actions } from '../actions/questions';
 
 const questions = handleActions({
   [actions.QUESTIONS_FETCHED](state, action) {
-    return state.set('questionList', Immutable.fromJS(action.payload.questions));
+    return state
+      .set('questionList', Immutable.fromJS(action.payload.questions))
+      .set('questionFetched', true);
   },
 
   [actions.ADD_QUESTION_SUCCESS](state, action) {
@@ -46,6 +48,7 @@ const questions = handleActions({
   },
 },
 Immutable.fromJS({
+  questionFetched: false,
   questionList: [],
   editQuestion: {
     text: '',

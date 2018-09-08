@@ -17,7 +17,8 @@ export default () => (
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/questions" component={Questions} />
       <Route path="/interviewPlanList" component={InterviewPlanList} />
-      <Route path="/interviewPlan" component={InterviewPlan} />
+      <Route path="/interviewPlan" exact component={InterviewPlan} />
+      <Route path="/interviewPlan/:interviewPlanId" component={InterviewPlan} />
     </div>
   </Router>
 );

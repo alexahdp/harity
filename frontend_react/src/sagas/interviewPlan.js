@@ -16,9 +16,26 @@ function* save() {
   yield put(ac.saveSuccess(savedInterviewPlan));
 }
 
+function* getInterviewPlan({ payload }) {
+  const interviewPlan = yield call(api.getInterviewPlan, payload.interviewPlanId);
+  yield put(ac.setInterviewPlan(interviewPlan));
+
+}
+
+function* addQuestion({ payload }) {
+  const state = yield select();
+  const question = state.getIn(['questions', 'questionList']).find(q => {
+    return q.get('_id') === payload.questionId;
+  });
+
+  yield put(ac.addQuestionToInterviewPlan(question));
+}
+
 function* mySaga() {
   yield takeEvery(actions.FETCH_INTERVIEWPLANS, fetch);
   yield takeEvery(actions.SAVE, save);
+  yield takeEvery(actions.GET_INTERVIEW_PLAN, getInterviewPlan);
+  yield takeEvery(actions.ADD_QUESTION, addQuestion);
 }
 
 export default mySaga;

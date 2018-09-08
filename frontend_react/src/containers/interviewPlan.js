@@ -16,5 +16,6 @@ export default connect(
     removeQuestion: actions.removeQuestion,
     setTitle: actions.setTitle,
     save: actions.save,
+    getInterviewPlan: actions.getInterviewPlan,
   },
 )(InterviewPlan);

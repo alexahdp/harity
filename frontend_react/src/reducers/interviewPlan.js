@@ -9,16 +9,16 @@ const interviewPlan = handleActions({
   [actions.CLOSE_INTERVIEWPLAN_DIALOG](state) {
     return state.set('interviewPlanDialogIsOpened', false);
   },
-  [actions.ADD_QUESTION](state, action) {
+  [actions.ADD_QUESTION_TO_INTERVIEW_PLAN](state, action) {
     return state.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.push(action.payload.questionId)
+      questions => questions.push(action.payload.question)
     );
   },
   [actions.REMOVE_QUESTION](state, action) {
     return state.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.filter(questionId => questionId !== action.payload.questionId)
+      questions => questions.filter(question => question.get('_id') !== action.payload.questionId)
     );
   },
   [actions.SET_TITLE](state, action) {
@@ -37,6 +37,9 @@ const interviewPlan = handleActions({
   },
   [actions.FETCH_INTERVIEWPLANS_SUCCESS](state, action) {
     return state.set('list', Immutable.fromJS(action.payload.interviewPlans));
+  },
+  [actions.SET_INTERVIEW_PLAN](state, action) {
+    return state.set('interviewPlan', Immutable.fromJS(action.payload.interviewPlan));
   },
 },
 Immutable.fromJS({

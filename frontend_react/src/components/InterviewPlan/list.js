@@ -23,8 +23,17 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.openInterviewPlan = this.openInterviewPlan.bind(this);
+  }
   componentDidMount() {
     this.props.fetchInterviewPlans();
+  }
+
+  openInterviewPlan(interviewPlanId) {
+    this.props.history.push(`/interviewPlan/${interviewPlanId}`);
   }
 
   render() {
@@ -83,7 +92,7 @@ class App extends React.PureComponent {
                   </ListItemText>
                   <ListItemSecondaryAction>
                     <IconButton>
-                      <EditIcon />
+                      <EditIcon onClick={() => this.openInterviewPlan(interviewPlan.get('_id'))} />
                     </IconButton>
                     <IconButton>
                       <DeleteIcon />

@@ -11,10 +11,14 @@ export const actions = {
   SET_TITLE: ga('SET_TITLE'),
   SAVE: ga('SAVE'),
   SAVE_SUCCESS: ga('SAVE_SUCCESS'),
+  GET_INTERVIEW_PLAN: ga('GET_INTERVIEW_PLAN'),
+  SET_INTERVIEW_PLAN: ga('SET_INTERVIEW_PLAN'),
+  ADD_QUESTION_TO_INTERVIEW_PLAN: ga('ADD_QUESTION_TO_INTERVIEW_PLAN'),
 };
 
 export default {
   addQuestion: createAction(actions.ADD_QUESTION, questionId => ({ questionId })),
+  addQuestionToInterviewPlan: createAction(actions.ADD_QUESTION_TO_INTERVIEW_PLAN, question => ({ question })),
   removeQuestion: createAction(actions.REMOVE_QUESTION, questionId => ({ questionId })),
   openInterviewPlanDialog: createAction(actions.OPEN_INTERVIEWPLAN_DIALOG),
   closeInterviewPlanDialog: createAction(actions.CLOSE_INTERVIEWPLAN_DIALOG),
@@ -23,4 +27,6 @@ export default {
   save: createAction(actions.SAVE),
   saveSuccess: createAction(actions.SAVE_SUCCESS, interviewPlan => ({ interviewPlan })),
   setTitle: createAction(actions.SET_TITLE, title => ({ title })),
+  getInterviewPlan: createAction(actions.GET_INTERVIEW_PLAN, interviewPlanId => ({ interviewPlanId })),
+  setInterviewPlan: createAction(actions.SET_INTERVIEW_PLAN, interviewPlan => ({ interviewPlan })),
 };
