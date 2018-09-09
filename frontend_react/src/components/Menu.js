@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom'
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withRouter } from 'react-router-dom';
 const classes = {};
 const ITEM_HEIGHT = 48;
 
-class App extends Component {
+class App extends PureComponent {
   state = {
     anchorEl: null,
   };
@@ -30,13 +29,50 @@ class App extends Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
-    const InterviewPlanListLink = withRouter(({ history }) => (
-      <Button
+    const menuItems = {
+      '/': {
+        title: 'Main',
+      },
+      '/interviewPlanList': {
+        title: 'InterviewPlan List',
+      },
+      '/dashboard': {
+        title: 'Dashboard',
+      },
+    };
+
+    const MyMenu = withRouter(({ history }) => {
+      return (
+        <Menu
+          open={open}
+          onClose={this.handleClose}
+          PaperProps={{
+            style: {
+              maxHeight: ITEM_HEIGHT * 4.5,
+              width: 200,
+            },
+          }}
+        >
+          {Object.keys(menuItems).map(link => (
+            <MenuItem
+              key={link}
+              selected={history.location.pathname === link}
+            >
+              <Link to={link}>{menuItems[link].title}</Link>
+            </MenuItem>
+          ))}
+        </Menu>
+      );
+    });
+
+    const CurrentLocation = withRouter(({ history }) => (
+      <Typography
+        variant="title"
         color="inherit"
-        onClick={() => history.push('/interviewPlanList')}
+        className={classes.flex}
       >
-        Login
-      </Button>
+        {menuItems[history.location.pathname].title}
+      </Typography>
     ));
 
     return (
@@ -48,45 +84,11 @@ class App extends Component {
               aria-label="Menu"
             >
             <MenuIcon onClick={this.handleClick} />
-
-              <Menu
-                open={open}
-                onClose={this.handleClose}
-                PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: 200,
-                  },
-                }}
-              >
-                <MenuItem
-                  key="news1"
-                  selected={true}
-                >
-                  <Link to="/aaa">aaa</Link>
-                </MenuItem>
-
-                <MenuItem
-                  key="news2"
-                  selected={false}
-                >
-                  <Link to="/bb">bbb</Link>
-                </MenuItem>
-              </Menu>
-
+              <MyMenu />
             </IconButton>
 
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.flex}
-            >
-              News
-            </Typography>
+            <CurrentLocation />
 
-            <Button color="inherit"><Link to="/interviewPlanList">interviewPlanList</Link></Button>
-
-            <InterviewPlanListLink />
           </Toolbar>
         </AppBar>
     );
