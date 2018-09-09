@@ -39,7 +39,7 @@ class App extends React.PureComponent {
   render() {
     const InterviewPlanForm = withRouter(({ history }) => (
       <Button
-        onClick={() => history.push('/interviewPlan')}
+        onClick={() => this.props.createNewInterviewPlan(this.props.history)}
         variant="fab"
         color="secondary"
         className={styles.fabClassName}
@@ -95,7 +95,7 @@ class App extends React.PureComponent {
                       <EditIcon onClick={() => this.openInterviewPlan(interviewPlan.get('_id'))} />
                     </IconButton>
                     <IconButton>
-                      <DeleteIcon />
+                      <DeleteIcon onClick={() => this.props.removeInterviewPlan(interviewPlan.get('_id'))}/>
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>

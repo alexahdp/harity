@@ -14,6 +14,10 @@ export const actions = {
   GET_INTERVIEW_PLAN: ga('GET_INTERVIEW_PLAN'),
   SET_INTERVIEW_PLAN: ga('SET_INTERVIEW_PLAN'),
   ADD_QUESTION_TO_INTERVIEW_PLAN: ga('ADD_QUESTION_TO_INTERVIEW_PLAN'),
+  REMOVE_INTERVIEW_PLAN: ga('REMOVE_INTERVIEW_PLAN'),
+  REMOVE_INTERVIEW_PLAN_SUCCESS: ga('REMOVE_INTERVIEW_PLAN_SUCCESS'),
+  RESET_CURRENT: ga('RESET_CURRENT'),
+  CREATE_INTERVIEW_PLAN: ga('CREATE_INTERVIEW_PLAN'),
 };
 
 export default {
@@ -24,9 +28,13 @@ export default {
   closeInterviewPlanDialog: createAction(actions.CLOSE_INTERVIEWPLAN_DIALOG),
   fetchInterviewPlans: createAction(actions.FETCH_INTERVIEWPLANS),
   fetchInterviewPlansSuccess: createAction(actions.FETCH_INTERVIEWPLANS_SUCCESS, interviewPlans => ({ interviewPlans })),
-  save: createAction(actions.SAVE),
+  save: createAction(actions.SAVE, history => ({ history })),
   saveSuccess: createAction(actions.SAVE_SUCCESS, interviewPlan => ({ interviewPlan })),
   setTitle: createAction(actions.SET_TITLE, title => ({ title })),
   getInterviewPlan: createAction(actions.GET_INTERVIEW_PLAN, interviewPlanId => ({ interviewPlanId })),
   setInterviewPlan: createAction(actions.SET_INTERVIEW_PLAN, interviewPlan => ({ interviewPlan })),
+  removeInterviewPlan: createAction(actions.REMOVE_INTERVIEW_PLAN, interviewPlanId => ({ interviewPlanId })),
+  removeInterviewPlanSuccess: createAction(actions.REMOVE_INTERVIEW_PLAN_SUCCESS, interviewPlanId => ({ interviewPlanId })),
+  resetCurrentInterviewPlan: createAction(actions.RESET_CURRENT),
+  createNewInterviewPlan: createAction(actions.CREATE_INTERVIEW_PLAN, history => ({ history })),
 };

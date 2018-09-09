@@ -11,5 +11,7 @@ export default connect(
     openInterviewPlanDialog: actions.openInterviewPlanDialog,
     closeInterviewPlanDialog: actions.closeInterviewPlanDialog,
     fetchInterviewPlans: actions.fetchInterviewPlans,
+    removeInterviewPlan: actions.removeInterviewPlan,
+    createNewInterviewPlan: actions.createNewInterviewPlan,
   },
 )(InterviewPlanList);

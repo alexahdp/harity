@@ -3,23 +3,7 @@ import axios from 'axios';
 export default {
   async fetch() {
     const res = await axios.get('/api/questions');
-    res.data.forEach(question => {
-      const labels = question.labels.map(label => ({ text: label }));
-      question.labels = labels; // eslint-disable-line no-param-reassign
-    });
     return res.data;
-
-    // return [
-    //   {_id: '1', text: 'WHat is this', labels: ['html', 'js']},
-    //   {_id: '2', text: 'WHat is DOM', labels: ['html']},
-    // ];
-
-    // const res = await axios.get('/api/questions');
-    // res.data.forEach(question => {
-    //   const labels = question.labels.map(label => ({ text: label }));
-    //   question.labels = labels; // eslint-disable-line no-param-reassign
-    // });
-    // return res.data;
   },
 
   async fetchTags() {
@@ -51,7 +35,6 @@ export default {
   },
 
   async remove(questionId) {
-    return;
     await axios.delete(`/api/question/${questionId}`);
   },
 };

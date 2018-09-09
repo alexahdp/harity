@@ -22,5 +22,9 @@ export default {
   async getInterviewPlan(interviewPlanId) {
     const res = await axios.get(`/api/interviewPlan/${interviewPlanId}`);
     return res.data;
+  },
+
+  async removeInterviewPlan(interviewPlanId) {
+    await axios.delete(`/api/interviewPlan/${interviewPlanId}`);
   }
 };

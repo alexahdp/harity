@@ -8,14 +8,28 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class App extends PureComponent {
+  constructor() {
+    super();
+
+    this.save = this.save.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchQuestions();
   }
 
   componentWillReceiveProps(props) {
-    if (props.match.params.interviewPlanId !== props.interviewPlan.get('_id')) {
+    if (
+      props.match.params.interviewPlanId !== props.interviewPlan.get('_id') &&
+      props.match.params.interviewPlanId
+    ) {
       props.getInterviewPlan(props.match.params.interviewPlanId);
     }
+  }
+
+  save() {
+    // ЭТО дичь, но как делать правильно пока не знаю
+    this.props.save(this.props.history);
   }
 
   render() {
@@ -83,7 +97,7 @@ class App extends PureComponent {
         <Grid container spasing={0} justify="space-evenly">
           <Grid item xs={8}>
             <Button
-              onClick={this.props.save}
+              onClick={this.save}
               color="primary"
               variant="contained"
             >

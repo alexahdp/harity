@@ -9,7 +9,7 @@ function* fetchQuestions() {
   if ( ! state.getIn(['questions', 'questionFetched'])) {
     questions = yield call(api.fetch);
   } else {
-    questions = state.getIn(['questions', 'questoinList']);
+    questions = state.getIn(['questions', 'questionList']);
   }
 
   yield put({
