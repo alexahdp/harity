@@ -13,12 +13,10 @@ services:
       - ./backend:/usr/src/harity/backend
   frontend:
     image: node:latest
-    command: npm run dev
+    command: npm run start
     network_mode: "host"
-    # ports:
-    #   - "80:80"
     volumes:
-      - ./frontend:/usr/src/harity/frontend
+      - ./frontend_react:/usr/src/harity/frontend
     working_dir: /usr/src/harity/frontend
   mongo:
     image: mongo:latest
