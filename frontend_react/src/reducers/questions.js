@@ -22,12 +22,13 @@ const questions = handleActions({
   },
 
   [actions.UPDATE_QUESTION_SUCCESS](state, action) {
+    const updatedQuestion = Immutable.fromJS(action.payload.question);
     let newState = state.update('questionList', list => list.map(question => {
-      return question.get('_id') === action.payload.question._id ? action.payload.question : question;
+      return question.get('_id') === updatedQuestion.get('_id') ? updatedQuestion : question;
     }));
 
     if (newState.getIn(['editQuestion', '_id']) === action.payload.question._id) {
-      newState = newState.set('editQuestion', Immutable.fromJS(action.payload.question));
+      newState = newState.set('editQuestion', updatedQuestion);
     }
 
     return newState;
@@ -35,9 +36,10 @@ const questions = handleActions({
 
   [actions.CLEAR_EDIT_QUESTION](state) {
     return state.set('editQuestion', Immutable.fromJS({
-      text: '',
-      labels: [],
       _id: null,
+      complexity: '',
+      labels: [],
+      text: '',
     }));
   },
 
@@ -51,9 +53,10 @@ Immutable.fromJS({
   questionFetched: false,
   questionList: [],
   editQuestion: {
-    text: '',
-    labels: [],
     _id: null,
+    complexity: 1,
+    labels: [],
+    text: '',
   },
 }),
 );

@@ -18,7 +18,7 @@ export const actions = {
 export default {
   fetchQuestions: createAction(actions.FETCH_QUESTIONS),
   addQuestion: createAction(actions.ADD_QUESTION, question => ({ question })),
-  updateQuestion: createAction(actions.ADD_QUESTION, question => ({ question })),
+  updateQuestion: createAction(actions.UPDATE_QUESTION, question => ({ question })),
   addQuestionSuccess: createAction(actions.ADD_QUESTION_SUCCESS, question => ({ question })),
   updateQuestionSuccess: createAction(actions.UPDATE_QUESTION_SUCCESS, question => ({ question })),
   editQuestion: createAction(actions.SET_EDIT_QUESTION, questionId => ({questionId})),

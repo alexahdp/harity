@@ -17,11 +17,6 @@ export default {
       labels: question.labels.map(label => label),
     };
 
-    if ( ! question._id) {
-      questionClone._id = Math.round(Math.random() * 100000);
-      return questionClone;
-    }
-
     let res;
     if (question._id) {
       res = await axios.put(`/api/question/${questionClone._id}`, questionClone);
@@ -29,9 +24,7 @@ export default {
       res = await axios.post('/api/question', questionClone);
     }
 
-    const savedQuestion = res.data;
-    savedQuestion.labels = savedQuestion.labels.map(label => ({ text: label }));
-    return savedQuestion;
+    return res.data;
   },
 
   async remove(questionId) {

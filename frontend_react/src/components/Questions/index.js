@@ -12,6 +12,10 @@ class App extends Component {
     this.props.addQuestion(question);
   }
 
+  updateQuestion = question => {
+    this.props.updateQuestion(question);
+  }
+
   render() {
     return (
       <Grid container spasing={32} justify="space-evenly">

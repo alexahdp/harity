@@ -42,7 +42,7 @@ class App extends Component {
           onChange={this.setFilterTag}
         />
 
-        <List>
+        <List className={styles.scrolledList}>
           {this.props.questions
             .filter(question => {
               if (this.state.filterTag === '') return true;
