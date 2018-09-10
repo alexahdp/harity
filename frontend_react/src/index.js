@@ -8,7 +8,6 @@ import { createLogger } from 'redux-logger';
 import Immutable from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 
-import styles from './components/assets/App.css';
 import registerServiceWorker from './registerServiceWorker';
 
 import reducer from './reducers';
