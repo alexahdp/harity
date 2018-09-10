@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from  'react-router-dom';
 
 import Dashboard from './components/Dashboard';
-import InterviewPlanList from './containers/interviewPlanList';
-import Questions from './containers/questions';
+import InterviewPlanList from './components/InterviewPlanList';
+import Questions from './components/Questions';
 import Menu from './components/Menu';
 import InterviewPlan from './components/InterviewPlan';
 

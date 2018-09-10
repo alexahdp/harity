@@ -67,7 +67,6 @@ class App extends PureComponent {
 const ContainerApp = connect(
   state => ({
     interviewPlan: state.getIn(['interviewPlan', 'interviewPlan']),
-    currentInterviewQuestionsMap: state => getCurrentInterviewQuestionsMap(state),
   }),
   {
     setTitle: actions.setTitle,

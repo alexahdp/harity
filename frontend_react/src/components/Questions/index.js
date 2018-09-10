@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import actions from '../../actions/questions';
 import QuestionList from './list';
 import QuestionForm from './form';
 
@@ -41,4 +43,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const ContainerApp = connect(
+  state => ({
+    questions: state.getIn(['questions', 'questionList']),
+    editQuestion: state.getIn(['questions', 'editQuestion']),
+  }),
+  {
+    fetchQuestions: actions.fetchQuestions,
+    addQuestion: actions.addQuestion,
+    updateQuestion: actions.updateQuestion,
+    setEditQuestion: actions.editQuestion,
+    removeQuestion: actions.removeQuestion,
+  }
+);
+
+export { App };
+export default ContainerApp;
