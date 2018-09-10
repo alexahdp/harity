@@ -74,7 +74,12 @@ class App extends PureComponent {
         color="inherit"
         className={classes.flex}
       >
-        {menuItems[history.location.pathname].title}
+        {
+          menuItems[history.location.pathname] ?
+            menuItems[history.location.pathname].title
+            :
+            ''
+        }
       </Typography>
     ));
 

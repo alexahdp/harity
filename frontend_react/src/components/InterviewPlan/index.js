@@ -11,7 +11,18 @@ class App extends PureComponent {
   constructor() {
     super();
 
+    this.state = {
+      filterTag: '',
+    };
+
+    this.setFilterTag = this.setFilterTag.bind(this);
     this.save = this.save.bind(this);
+  }
+
+  setFilterTag(e) {
+    this.setState({
+      filterTag: e.target.value,
+    });
   }
 
   componentDidMount() {
@@ -56,9 +67,24 @@ class App extends PureComponent {
           <Grid item xs={4}>
             <h2>Source questions list</h2>
 
+            <TextField
+              value={this.state.filterTag}
+              label="Tag filter"
+              fullWidth={true}
+              margin="normal"
+              onChange={this.setFilterTag}
+            />
+
             <List>
               {this.props.questions
-                .filter(question => !selectedQuestionsMap[question.get('_id')])
+                .filter(question => ( ! selectedQuestionsMap[question.get('_id')]))
+                .filter(question => {
+                  if (this.state.filterTag !== '') {
+                    return question.get('labels').some(label => label.includes(this.state.filterTag));
+                  }
+
+                  return true;
+                })
                 .map(question => (
                   <ListItem key={question.get('_id')} divider={true}>
                     <ListItemText>
