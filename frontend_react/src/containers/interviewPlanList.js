@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import InterviewPlanList from '../components/InterviewPlan/list';
+import InterviewPlanList from '../components/InterviewPlanList';
 import actions from '../actions/interviewPlan';
 
 export default connect(
