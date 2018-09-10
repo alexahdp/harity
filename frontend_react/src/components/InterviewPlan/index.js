@@ -9,28 +9,14 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import QuestionsPull from './questionsPull';
 import styles from './assets/index.css';
 
 class App extends PureComponent {
   constructor() {
     super();
 
-    this.state = {
-      filterTag: '',
-    };
-
-    this.setFilterTag = this.setFilterTag.bind(this);
     this.save = this.save.bind(this);
-  }
-
-  setFilterTag(e) {
-    this.setState({
-      filterTag: e.target.value,
-    });
-  }
-
-  componentDidMount() {
-    this.props.fetchQuestions();
   }
 
   componentWillReceiveProps(props) {
@@ -48,8 +34,6 @@ class App extends PureComponent {
   }
 
   render() {
-    const { selectedQuestionsMap } = this.props;
-
     return (
       <React.Fragment>
         <Grid container spasing={0} justify="space-evenly">
@@ -65,40 +49,7 @@ class App extends PureComponent {
         </Grid>
 
         <Grid container spasing={0} justify="space-evenly">
-          <Grid item xs={4}>
-            <h2>Source questions list</h2>
-
-            <TextField
-              value={this.state.filterTag}
-              label="Tag filter"
-              fullWidth={true}
-              margin="normal"
-              onChange={this.setFilterTag}
-            />
-
-            <List>
-              {this.props.questions
-                .filter(question => ( ! selectedQuestionsMap[question.get('_id')]))
-                .filter(question => {
-                  if (this.state.filterTag !== '') {
-                    return question.get('labels').some(label => label.includes(this.state.filterTag));
-                  }
-
-                  return true;
-                })
-                .map(question => (
-                  <ListItem key={question.get('_id')} divider={true}>
-                    <ListItemText>
-                      <h3>{question.get('text')}</h3>
-                    </ListItemText>
-                    <Checkbox
-                      onChange={() => this.props.addQuestion(question.get('_id'))}
-                    />
-                  </ListItem>)
-                )
-              }
-            </List>
-          </Grid>
+          <QuestionsPull />
 
           <Grid item xs={4}>
             <h2>Target questions list</h2>
