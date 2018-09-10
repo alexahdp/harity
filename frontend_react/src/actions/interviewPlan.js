@@ -18,6 +18,8 @@ export const actions = {
   REMOVE_INTERVIEW_PLAN_SUCCESS: ga('REMOVE_INTERVIEW_PLAN_SUCCESS'),
   RESET_CURRENT: ga('RESET_CURRENT'),
   CREATE_INTERVIEW_PLAN: ga('CREATE_INTERVIEW_PLAN'),
+  MOVE_UP_QUESTION: ga('MOVE_UP_QUESTION'),
+  MOVE_DOWN_QUESTION: ga('MOVE_DOWN_QUESTION'),
 };
 
 export default {
@@ -37,4 +39,6 @@ export default {
   removeInterviewPlanSuccess: createAction(actions.REMOVE_INTERVIEW_PLAN_SUCCESS, interviewPlanId => ({ interviewPlanId })),
   resetCurrentInterviewPlan: createAction(actions.RESET_CURRENT),
   createNewInterviewPlan: createAction(actions.CREATE_INTERVIEW_PLAN, history => ({ history })),
+  moveUpQuestion: createAction(actions.MOVE_UP_QUESTION, questionId => ({ questionId })),
+  moveDownQuestion: createAction(actions.MOVE_DOWN_QUESTION, questionId => ({ questionId })),
 };

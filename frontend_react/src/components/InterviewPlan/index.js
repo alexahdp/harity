@@ -6,6 +6,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import styles from './assets/index.css';
 
 class App extends PureComponent {
   constructor() {
@@ -105,7 +109,21 @@ class App extends PureComponent {
             <List>
               {this.props.interviewPlan.get('questions')
                 .map(question => (
-                  <ListItem key={question.get('_id')} divider={true}>
+                  <ListItem key={question.get('_id')} divider={true} className={styles.targetListItem}>
+                    <IconButton
+                      aria-label="Cart"
+                      onClick={() => this.props.moveDownQuestion(question.get('_id'))}
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton>
+
+                    <IconButton
+                      aria-label="Cart"
+                      onClick={() => this.props.moveUpQuestion(question.get('_id'))}
+                    >
+                      <ExpandLessIcon />
+                    </IconButton>
+
                     <ListItemText>
                       <h3>{question.get('text')}</h3>
                     </ListItemText>

@@ -13,7 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 
-import styles from './assets/styles.css';
+import styles from './assets/list.css';
 
 
 import Dialog from '@material-ui/core/Dialog';

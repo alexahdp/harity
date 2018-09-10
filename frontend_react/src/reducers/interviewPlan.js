@@ -63,7 +63,45 @@ const interviewPlan = handleActions({
       questions: [],
       title: '',
     }));
-  }
+  },
+  [actions.MOVE_UP_QUESTION](state, action) {
+    const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => {
+      return question.get('_id') === action.payload.questionId;
+    });
+
+    if (index === 0) return state;
+
+    const question = state.getIn(['interviewPlan', 'questions', index]);
+
+    const newState = state.updateIn(
+      ['interviewPlan', 'questions'],
+      questions => questions.splice(index, 1)
+    );
+
+    return newState.updateIn(
+      ['interviewPlan', 'questions'],
+      questions => questions.splice(index - 1, 0, question)
+    );
+  },
+  [actions.MOVE_DOWN_QUESTION](state, action) {
+    const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => {
+      return question.get('_id') === action.payload.questionId;
+    });
+
+    if (index === state.getIn(['interviewPlan', 'questions']).size) return state;
+
+    const question = state.getIn(['interviewPlan', 'questions', index]);
+
+    const newState = state.updateIn(
+      ['interviewPlan', 'questions'],
+      questions => questions.splice(index, 1)
+    );
+
+    return newState.updateIn(
+      ['interviewPlan', 'questions'],
+      questions => questions.splice(index + 1, 0, question)
+    );
+  },
 },
 Immutable.fromJS({
   interviewPlan: {

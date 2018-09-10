@@ -7,15 +7,20 @@ export default connect(
   state => ({
     questions: state.getIn(['questions', 'questionList']),
     interviewPlan: state.getIn(['interviewPlan', 'interviewPlan']),
-
   }),
   {
-    openInterviewPlanDialog: actions.openInterviewPlanDialog,
+    ...actions,
     fetchQuestions: questionsActions.fetchQuestions,
-    addQuestion: actions.addQuestion,
-    removeQuestion: actions.removeQuestion,
-    setTitle: actions.setTitle,
-    save: actions.save,
-    getInterviewPlan: actions.getInterviewPlan,
-  },
+  }
+  // {
+  //   openInterviewPlanDialog: actions.openInterviewPlanDialog,
+  //   fetchQuestions: questionsActions.fetchQuestions,
+  //   addQuestion: actions.addQuestion,
+  //   removeQuestion: actions.removeQuestion,
+  //   setTitle: actions.setTitle,
+  //   save: actions.save,
+  //   getInterviewPlan: actions.getInterviewPlan,
+  //   moveUpQuestion: actions.moveUpQuestion,
+  //   moveDownQuestion: actions.moveDownQuestion,
+  // },
 )(InterviewPlan);
