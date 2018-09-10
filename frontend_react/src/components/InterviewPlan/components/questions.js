@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -7,9 +8,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Checkbox from '@material-ui/core/Checkbox';
+import actions from '../../../actions/interviewPlan';
 import styles from '../assets/index.css';
 
-export default props => (
+const App = props => (
   <Grid item xs={4}>
     <h2>Target questions list</h2>
 
@@ -44,3 +46,16 @@ export default props => (
     </List>
   </Grid>
 );
+
+const ConteinerApp = connect(
+  state => ({
+    interviewPlan: state.getIn(['interviewPlan', 'interviewPlan']),
+  }),
+  {
+    moveUpQuestion: actions.moveUpQuestion,
+    moveDownQuestion: actions.moveDownQuestion,
+    removeQuestion: actions.removeQuestion,
+  }
+)(App);
+
+export default ConteinerApp;

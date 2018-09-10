@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import actions from '../../actions/interviewPlan';
 import QuestionsPull from './components/questionsPull';
 import Questions from './components/questions';
 
@@ -43,7 +45,7 @@ class App extends PureComponent {
 
         <Grid container spasing={0} justify="space-evenly">
           <QuestionsPull />
-          <Questions interviewPlan={this.props.interviewPlan} />
+          <Questions />
         </Grid>
 
         <Grid container spasing={0} justify="space-evenly">
@@ -62,4 +64,17 @@ class App extends PureComponent {
   }
 }
 
-export default App;
+const ContainerApp = connect(
+  state => ({
+    interviewPlan: state.getIn(['interviewPlan', 'interviewPlan']),
+    currentInterviewQuestionsMap: state => getCurrentInterviewQuestionsMap(state),
+  }),
+  {
+    setTitle: actions.setTitle,
+    save: actions.save,
+    getInterviewPlan: actions.getInterviewPlan,
+  }
+)(App);
+
+export { App };
+export default ContainerApp;

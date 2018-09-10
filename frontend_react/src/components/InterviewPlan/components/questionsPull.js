@@ -32,7 +32,6 @@ class App extends PureComponent {
   }
 
   render() {
-    console.log(this.props.currentInterviewQuestionsMap)
     return (
       <Grid item xs={4}>
         <h2>Source questions list</h2>

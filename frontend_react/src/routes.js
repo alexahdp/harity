@@ -5,7 +5,7 @@ import Dashboard from './components/Dashboard';
 import InterviewPlanList from './containers/interviewPlanList';
 import Questions from './containers/questions';
 import Menu from './components/Menu';
-import InterviewPlan from './containers/interviewPlan';
+import InterviewPlan from './components/InterviewPlan';
 
 export default () => (
   <Router>
