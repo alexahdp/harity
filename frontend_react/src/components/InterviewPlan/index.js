@@ -48,10 +48,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const selectedQuestionsMap = this.props.interviewPlan.get('questions').reduce((o, question) => {
-      o[question.get('_id')] = question;
-      return o;
-    }, {});
+    const { selectedQuestionsMap } = this.props;
 
     return (
       <React.Fragment>

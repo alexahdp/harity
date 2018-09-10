@@ -64,6 +64,7 @@ const interviewPlan = handleActions({
       title: '',
     }));
   },
+
   [actions.MOVE_UP_QUESTION](state, action) {
     const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => {
       return question.get('_id') === action.payload.questionId;
@@ -83,6 +84,7 @@ const interviewPlan = handleActions({
       questions => questions.splice(index - 1, 0, question)
     );
   },
+
   [actions.MOVE_DOWN_QUESTION](state, action) {
     const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => {
       return question.get('_id') === action.payload.questionId;
