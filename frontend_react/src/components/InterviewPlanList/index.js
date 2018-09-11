@@ -29,22 +29,18 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const InterviewPlanForm = withRouter(({ history }) => (
-      <Button
-        onClick={() => this.props.createNewInterviewPlan(this.props.history)}
-        variant="fab"
-        color="secondary"
-        className={styles.fabClassName}
-      >
-        <AddIcon />
-      </Button>
-    ));
-
     return (
       <Grid container spasing={32} justify="space-evenly">
         <Grid item xs={6}>
 
-          <InterviewPlanForm />
+          <Button
+            onClick={() => this.props.createNewInterviewPlan(this.props.history)}
+            variant="fab"
+            color="secondary"
+            className={[styles.fabClassName, styles.addInterviewPlanButton]}
+          >
+            <AddIcon />
+          </Button>
 
           { (this.props.interviewPlanList.size === 0) ?
             (<h3>Список пуст</h3>)
