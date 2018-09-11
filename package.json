@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "husky": "^0.14.3"
+  },
+  "dependencies": {
+    "recompose": "^0.30.0"
   }
 }

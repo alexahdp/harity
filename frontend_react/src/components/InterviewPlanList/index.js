@@ -1,83 +1,77 @@
 import React from 'react';
+import { compose, withHandlers, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
-import Grid from '@material-ui/core/Grid';
-import { withRouter } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import actions from '../../actions/interviewPlan';
 import styles from './assets/list.css';
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const App = props => (
+  <Grid container spasing={32} justify="space-evenly">
+    <Grid item xs={6}>
 
-    this.openInterviewPlan = this.openInterviewPlan.bind(this);
-  }
-  componentDidMount() {
-    this.props.fetchInterviewPlans();
-  }
+      <Button
+        onClick={() => props.createNewInterviewPlan(props.history)}
+        variant="fab"
+        color="secondary"
+        className={[styles.fabClassName, styles.addInterviewPlanButton]}
+      >
+        <AddIcon />
+      </Button>
 
-  openInterviewPlan(interviewPlanId) {
-    this.props.history.push(`/interviewPlan/${interviewPlanId}`);
-  }
-
-  render() {
-    return (
-      <Grid container spasing={32} justify="space-evenly">
-        <Grid item xs={6}>
-
-          <Button
-            onClick={() => this.props.createNewInterviewPlan(this.props.history)}
-            variant="fab"
-            color="secondary"
-            className={[styles.fabClassName, styles.addInterviewPlanButton]}
-          >
-            <AddIcon />
-          </Button>
-
-          { (this.props.interviewPlanList.size === 0) ?
-            (<h3>Список пуст</h3>)
-            :
-            <List>
-              {this.props.interviewPlanList.map(interviewPlan => (
-                <ListItem className={styles.interviewPlanItem} key={interviewPlan.get('_id')}>
-                  <ListItemText>
-                    <h3>{interviewPlan.get('title')}</h3>
-                  </ListItemText>
-                  <ListItemSecondaryAction>
-                    <IconButton>
-                      <EditIcon onClick={() => this.openInterviewPlan(interviewPlan.get('_id'))} />
-                    </IconButton>
-                    <IconButton>
-                      <DeleteIcon onClick={() => this.props.removeInterviewPlan(interviewPlan.get('_id'))}/>
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          }
-          </Grid>
+      { (props.interviewPlanList.size === 0) ?
+        (<h3>Список пуст</h3>)
+        :
+        <List>
+          {props.interviewPlanList.map(interviewPlan => (
+            <ListItem className={styles.interviewPlanItem} key={interviewPlan.get('_id')}>
+              <ListItemText>
+                <h3>{interviewPlan.get('title')}</h3>
+              </ListItemText>
+              <ListItemSecondaryAction>
+                <IconButton>
+                  <EditIcon onClick={() => props.openInterviewPlan(interviewPlan.get('_id'))} />
+                </IconButton>
+                <IconButton>
+                  <DeleteIcon onClick={() => props.removeInterviewPlan(interviewPlan.get('_id'))}/>
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
+        </List>
+      }
       </Grid>
-    );
-  }
-}
+  </Grid>
+);
 
-const ContainerApp = connect(
-  state => ({
-    interviewPlanList: state.getIn(['interviewPlan', 'list']),
+const ContainerApp = compose(
+  connect(state => ({
+      interviewPlanList: state.getIn(['interviewPlan', 'list']),
+    }),
+    {
+      createNewInterviewPlan: actions.createNewInterviewPlan,
+      fetchInterviewPlans: actions.fetchInterviewPlans,
+      removeInterviewPlan: actions.removeInterviewPlan,
+    }
+  ),
+  withHandlers({
+    openInterviewPlan: props => interviewPlanId => {
+      props.history.push(`/interviewPlan/${interviewPlanId}`);
+    },
   }),
-  {
-    createNewInterviewPlan: actions.createNewInterviewPlan,
-    fetchInterviewPlans: actions.fetchInterviewPlans,
-    removeInterviewPlan: actions.removeInterviewPlan,
-  }
+  lifecycle({
+    componentDidMount(props) {
+      props.fetchInterviewPlans();
+    },
+  })
 )(App);
 
 export { App };
