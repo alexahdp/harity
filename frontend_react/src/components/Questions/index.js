@@ -55,7 +55,7 @@ const ContainerApp = connect(
     setEditQuestion: actions.editQuestion,
     removeQuestion: actions.removeQuestion,
   }
-);
+)(App);
 
 export { App };
 export default ContainerApp;
