@@ -3,14 +3,6 @@ import { handleActions } from 'redux-actions';
 import { actions } from '../actions/interviewPlan';
 
 const interviewPlan = handleActions({
-  [actions.OPEN_INTERVIEWPLAN_DIALOG](state) {
-    return state.set('interviewPlanDialogIsOpened', true);
-  },
-
-  [actions.CLOSE_INTERVIEWPLAN_DIALOG](state) {
-    return state.set('interviewPlanDialogIsOpened', false);
-  },
-
   [actions.ADD_QUESTION_TO_INTERVIEW_PLAN](state, action) {
     return state.updateIn(
       ['interviewPlan', 'questions'],
@@ -113,7 +105,6 @@ Immutable.fromJS({
     questions: [],
     title: '',
   },
-  interviewPlanDialogIsOpened: false,
   list: [],
 }));
 

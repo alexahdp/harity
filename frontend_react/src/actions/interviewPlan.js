@@ -3,8 +3,6 @@ import ga from '../helpers/genAction';
 
 export const actions = {
   ADD_QUESTION: ga('ADD_QUESTION'),
-  OPEN_INTERVIEWPLAN_DIALOG: ga('OPEN_INTERVIEWPLAN_DIALOG'),
-  CLOSE_INTERVIEWPLAN_DIALOG: ga('CLOSE_INTERVIEWPLAN_DIALOG'),
   FETCH_INTERVIEWPLANS: ga('FETCH_INTERVIEWPLANS'),
   FETCH_INTERVIEWPLANS_SUCCESS: ga('FETCH_INTERVIEWPLANS_SUCCESS'),
   REMOVE_QUESTION: ga('REMOVE_QUESTION'),
@@ -26,8 +24,6 @@ export default {
   addQuestion: createAction(actions.ADD_QUESTION, questionId => ({ questionId })),
   addQuestionToInterviewPlan: createAction(actions.ADD_QUESTION_TO_INTERVIEW_PLAN, question => ({ question })),
   removeQuestion: createAction(actions.REMOVE_QUESTION, questionId => ({ questionId })),
-  openInterviewPlanDialog: createAction(actions.OPEN_INTERVIEWPLAN_DIALOG),
-  closeInterviewPlanDialog: createAction(actions.CLOSE_INTERVIEWPLAN_DIALOG),
   fetchInterviewPlans: createAction(actions.FETCH_INTERVIEWPLANS),
   fetchInterviewPlansSuccess: createAction(actions.FETCH_INTERVIEWPLANS_SUCCESS, interviewPlans => ({ interviewPlans })),
   save: createAction(actions.SAVE, history => ({ history })),

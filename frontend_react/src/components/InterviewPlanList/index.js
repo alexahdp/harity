@@ -22,7 +22,7 @@ const App = props => (
         onClick={() => props.createNewInterviewPlan(props.history)}
         variant="fab"
         color="secondary"
-        className={[styles.fabClassName, styles.addInterviewPlanButton]}
+        classes={{root: styles.addInterviewPlanButton}}
       >
         <AddIcon />
       </Button>
@@ -68,8 +68,8 @@ const ContainerApp = compose(
     },
   }),
   lifecycle({
-    componentDidMount(props) {
-      props.fetchInterviewPlans();
+    componentDidMount() {
+      this.props.fetchInterviewPlans();
     },
   })
 )(App);
