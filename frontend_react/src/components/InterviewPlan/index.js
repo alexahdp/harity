@@ -14,6 +14,15 @@ class App extends PureComponent {
     this.save = this.save.bind(this);
   }
 
+  componentDidMount() {
+    if (
+      this.props.match.params.interviewPlanId !== this.props.interviewPlan.get('_id') &&
+      this.props.match.params.interviewPlanId
+    ) {
+      this.props.getInterviewPlan(this.props.match.params.interviewPlanId);
+    }
+  }
+
   componentWillReceiveProps(props) {
     if (
       props.match.params.interviewPlanId !== props.interviewPlan.get('_id') &&

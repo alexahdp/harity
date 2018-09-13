@@ -1,3 +1,9 @@
 .targetListItem {
   padding: 0 !important;
+  margin: 0 !important;
+}
+
+.questionTag {
+  font-size: 11px;
+  padding: 0;
 }

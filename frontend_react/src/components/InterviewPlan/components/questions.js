@@ -18,7 +18,13 @@ const App = props => (
     <List>
       {props.interviewPlan.get('questions')
         .map(question => (
-          <ListItem key={question.get('_id')} divider={true} className={styles.targetListItem}>
+          <ListItem
+            key={question.get('_id')}
+            divider={true}
+            classes={{root: styles.targetListItem}}
+            disableGutters={true}
+            dense={true}
+          >
             <IconButton
               aria-label="Cart"
               onClick={() => props.moveDownQuestion(question.get('_id'))}
@@ -34,14 +40,15 @@ const App = props => (
             </IconButton>
 
             <ListItemText>
-              <h3>{question.get('text')}</h3>
+              <p>{question.get('text')}</p>
             </ListItemText>
+
             <Checkbox
               checked
               onChange={() => props.removeQuestion(question.get('_id'))}
             />
-          </ListItem>)
-        )
+          </ListItem>
+        ))
       }
     </List>
   </Grid>
@@ -58,4 +65,5 @@ const ConteinerApp = connect(
   }
 )(App);
 
+export { App };
 export default ConteinerApp;

@@ -6,9 +6,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
 import questionsActions from '../../../actions/questions';
 import actions from '../../../actions/interviewPlan';
 import { getCurrentInterviewQuestionsMap } from '../../../selectors/questionsToMap';
+import styles from '../assets/index.css';
 
 class App extends PureComponent {
   constructor() {
@@ -55,9 +57,23 @@ class App extends PureComponent {
               return true;
             })
             .map(question => (
-              <ListItem key={question.get('_id')} divider={true}>
+              <ListItem
+                key={question.get('_id')}
+                divider={true}
+                disableGutters={true}
+                dense={true}
+              >
+                <div className={styles.questionTags}>
+                  {question.get('labels').map(label => (
+                    <Chip
+                      key={label}
+                      label={label}
+                      classes={{label: styles.questionTag}}
+                    />
+                  ))}
+                </div>
                 <ListItemText>
-                  <h3>{question.get('text')}</h3>
+                  <p>{question.get('text')}</p>
                 </ListItemText>
                 <Checkbox
                   onChange={() => this.props.addQuestion(question.get('_id'))}
