@@ -10,8 +10,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import reducer from './reducers';
-import sagas from './sagas/index';
+import reducer from './reducers.js';
+import sagas from './sagas';
 import Routes from './routes';
 
 const logger = createLogger({

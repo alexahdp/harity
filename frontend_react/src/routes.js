@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from  'react-router-dom';
 
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard/index';
 import InterviewPlanList from './components/InterviewPlanList';
 import Questions from './components/Questions';
-import Menu from './components/Menu';
+import Menu from './components/Menu/index';
 import InterviewPlan from './components/InterviewPlan';
 import Candidate from './components/Candidate';
 import CandidateList from './components/Candidate/List';
