@@ -1,6 +1,6 @@
 import { takeEvery, put, call, select } from 'redux-saga/effects';
-import ac, { actions } from '../actions/interviewPlan';
-import api from '../api/interviewPlan';
+import ac, { actions } from './actions';
+import api from './api';
 
 function* fetch() {
   const interviewPlans = yield call(api.fetch);

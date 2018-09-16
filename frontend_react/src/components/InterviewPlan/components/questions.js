@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Checkbox from '@material-ui/core/Checkbox';
-import actions from '../../../actions/interviewPlan';
+import actions from '../actions';
 import styles from '../assets/index.css';
 
 const App = props => (

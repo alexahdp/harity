@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects';
-import questionsSaga from './questions';
-import interviewPlansSaga from './interviewPlan';
+import questionsSaga from '../components/Questions/saga';
+import interviewPlansSaga from '../components/InterviewPlan/saga';
 import candidateSaga from '../components/Candidate/saga';
 
 function* mySaga() {

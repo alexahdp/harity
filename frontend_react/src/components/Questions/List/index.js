@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import styles from './assets/list.css';
+import styles from '../assets/list.css';
 
 class App extends Component {
   constructor() {

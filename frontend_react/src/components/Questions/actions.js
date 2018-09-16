@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import ga from '../helpers/genAction';
+import ga from '../../helpers/genAction';
 
 export const actions = {
   FETCH_QUESTIONS: ga('FETCH_QUESTIONS'),

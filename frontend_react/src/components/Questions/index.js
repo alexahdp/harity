@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import actions from '../../actions/questions';
-import QuestionList from './list';
-import QuestionForm from './form';
+import actions from './actions';
+import QuestionList from './List';
+import QuestionForm from './Form';
 
 class App extends Component {
   componentDidMount() {

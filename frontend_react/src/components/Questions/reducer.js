@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
-import { actions } from '../actions/questions';
+import { actions } from './actions';
 
 const questions = handleActions({
   [actions.QUESTIONS_FETCHED](state, action) {

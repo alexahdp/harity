@@ -7,8 +7,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
-import questionsActions from '../../../actions/questions';
-import actions from '../../../actions/interviewPlan';
+import questionsActions from '../../Questions/actions';
+import actions from '../actions';
 import { getCurrentInterviewQuestionsMap } from '../../../selectors/questionsToMap';
 import styles from '../assets/index.css';
 

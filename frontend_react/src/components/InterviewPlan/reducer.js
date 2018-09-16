@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { handleActions } from 'redux-actions';
-import { actions } from '../actions/interviewPlan';
+import { actions } from './actions';
 
 const interviewPlan = handleActions({
   [actions.ADD_QUESTION_TO_INTERVIEW_PLAN](state, action) {

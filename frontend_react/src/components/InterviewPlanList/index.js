@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
-import actions from '../../actions/interviewPlan';
+import actions from '../InterviewPlan/actions';
 import styles from './assets/list.css';
 
 const App = props => (

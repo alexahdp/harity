@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import actions from '../../actions/interviewPlan';
+import actions from './actions';
 import QuestionsPull from './components/questionsPull';
 import Questions from './components/questions';
 

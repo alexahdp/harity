@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
-import styles from './assets/form.css';
+import styles from '../assets/form.css';
 
 class App extends PureComponent {
   constructor(props) {
