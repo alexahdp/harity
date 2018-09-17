@@ -5,11 +5,11 @@ import { actions } from './actions';
 const initialState = {
   currentCandidate: {
     _id: null,
+    birthYear: '',
     email: '',
     firstName: '',
-    birthYear: '',
     lastName: '',
-    createdAt: '',
+    createdAt: null,
     description: '',
     level: 'none',
   },
@@ -26,6 +26,9 @@ const candidate = handleActions(
     },
     [actions.CANDIDATE_FETCH_LIST_SUCCESS](state, action) {
       return state.set('list', fromJS(action.payload.candidates));
+    },
+    [actions.CANDIDATE_SAVE_SUCCESS](state, action) {
+      return state.set('currentCandidate', Immutable.Map(action.payload.candidate));
     },
   },
   Immutable.fromJS(initialState)

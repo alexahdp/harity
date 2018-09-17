@@ -42,6 +42,9 @@ class App extends PureComponent {
       '/questions': {
         title: 'Questions',
       },
+      '/candidates': {
+        title: 'Candidates',
+      },
     };
 
     const MyMenu = withRouter(({ history }) => {

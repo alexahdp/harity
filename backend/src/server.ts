@@ -12,7 +12,7 @@ import conf from './config/appconf.ts';
 import user from './routes/user.ts';
 import question from './routes/question.ts';
 import interviewPlan from './routes/interviewPlan.ts';
-
+import candidate from './routes/candidate.ts';
 
 mongoose.connect(conf.db.url);
 const db = mongoose.connection;
@@ -57,6 +57,11 @@ authRouter.put('/api/interviewplan/:interviewPlanId', interviewPlan.update);
 authRouter.delete('/api/interviewplan/:interviewPlanId', interviewPlan.delete);
 authRouter.get('/api/interviewplanList', interviewPlan.list);
 
+authRouter.get('/api/candidate/:candidateId', candidate.get);
+authRouter.post('/api/candidate', candidate.create);
+authRouter.put('/api/candidate/:candidateId', candidate.update);
+authRouter.delete('/api/candidate/:candidateId', candidate.delete);
+authRouter.get('/api/candidates', candidate.list);
 
 app
   .use(router.routes())

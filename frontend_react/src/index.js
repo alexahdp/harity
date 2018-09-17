@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import { createLogger } from 'redux-logger';
 import Immutable from 'immutable';
 import createSagaMiddleware from 'redux-saga';
-
+import history from './history';
 import registerServiceWorker from './registerServiceWorker';
 
 import reducer from './reducers.js';
@@ -25,7 +25,7 @@ const composeEnhancers =
       // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
     }) : compose;
 
-const history = createHistory();
+// const history = createHistory();
 const sagaMiddleware = createSagaMiddleware();
 const middleware = composeEnhancers(applyMiddleware(sagaMiddleware, logger, routerMiddleware(history)));
 
