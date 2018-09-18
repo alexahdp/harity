@@ -30,6 +30,9 @@ const candidate = handleActions(
     [actions.CANDIDATE_SAVE_SUCCESS](state, action) {
       return state.set('currentCandidate', Immutable.Map(action.payload.candidate));
     },
+    [actions.CANDIDATE_FETCH_SUCCESS](state, action) {
+      return state.set('currentCandidate', Immutable.Map(action.payload.candidate));
+    },
   },
   Immutable.fromJS(initialState)
 );

@@ -6,7 +6,7 @@ const publicAttrs = ['_id', 'email', 'firstName', 'lastName', 'description', 'cr
 
 export default {
   async get(ctx:any) {
-    const candidate = await Candidate.findOne({email: ctx.params.candidateId}).exec();
+    const candidate = await Candidate.findOne({_id: ctx.params.candidateId}).exec();
     if (candidate === null) {
       ctx.status = 404;
       return;
@@ -16,7 +16,7 @@ export default {
   },
 
   async update(ctx:any) {
-    const candidate = await Candidate.findOne({email: ctx.params.candidateId}).exec();
+    const candidate = await Candidate.findOne({_id: ctx.params.candidateId}).exec();
     if (candidate === null) {
       ctx.status = 404;
       return;

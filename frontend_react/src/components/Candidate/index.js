@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -27,7 +28,9 @@ const candidateScheme = Yup.object().shape({
 
 const App = props => (
   <Grid container justify="center">
+    {console.log('WTF')}
     <Formik
+      enableReinitialize={true}
         initialValues={props.candidate.toJS()}
         validationSchema={candidateScheme}
         onSubmit={(values) => {
@@ -135,14 +138,28 @@ const App = props => (
   </Grid>
 );
 
-const ContainerApp = connect(
-  state => ({
-    candidate: state.getIn(['candidates', 'currentCandidate']),
-  }),
-  {
-    save: actions.save,
-    setProperty: actions.setProperty,
-  }
+const ContainerApp = compose(
+  connect(
+    state => ({
+      candidate: state.getIn(['candidates', 'currentCandidate']),
+    }),
+    {
+      save: actions.save,
+      setProperty: actions.setProperty,
+      fetchList: actions.fetchList,
+      getCandidate: actions.fetch,
+    }
+  ),
+  lifecycle({
+    componentWillMount() {
+      if (
+        this.props.match.params.candidateId &&
+        this.props.match.params.candidateId !== this.props.candidate.get('_id')
+      ) {
+        this.props.getCandidate(this.props.match.params.candidateId);
+      }
+    }
+  })
 )(App);
 
 export { App }

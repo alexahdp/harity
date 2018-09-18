@@ -29,7 +29,7 @@ export default {
     return result.data;
   },
 
-  async get(candidateId) {
+  async fetch(candidateId) {
     const result = await axios.get(`/api/candidate/${candidateId}`);
     return result.data;
   },

@@ -25,6 +25,11 @@ export default () => (
       />
       <Route
         path="/candidate"
+        exact
+        component={Candidate}
+      />
+      <Route
+        path="/candidate/:candidateId"
         component={Candidate}
       />
       <Route
