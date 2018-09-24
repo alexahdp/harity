@@ -94,7 +94,7 @@ class App extends PureComponent {
               color="inherit"
               aria-label="Menu"
             >
-            <MenuIcon onClick={this.handleClick} />
+              <MenuIcon onClick={this.handleClick} />
               <MyMenu />
             </IconButton>
 

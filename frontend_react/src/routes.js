@@ -9,7 +9,7 @@ import InterviewPlan from './components/InterviewPlan';
 import Candidate from './components/Candidate';
 import CandidateList from './components/Candidate/List';
 
-export default () => (
+const App = () => (
   <Router>
     <div>
       <Menu />
@@ -44,3 +44,5 @@ export default () => (
     </div>
   </Router>
 );
+
+export default App;

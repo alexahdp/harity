@@ -1,43 +1,30 @@
+/* global NODE_ENV */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import createHistory from 'history/createBrowserHistory';
-import { routerMiddleware } from 'react-router-redux';
-import { createLogger } from 'redux-logger';
-import Immutable from 'immutable';
-import createSagaMiddleware from 'redux-saga';
 import history from './history';
 import registerServiceWorker from './registerServiceWorker';
-
-import reducer from './reducers.js';
-import sagas from './sagas';
 import Routes from './routes';
+import configureStore from './configureStore';
 
-const logger = createLogger({
-  stateTransformer: state => (Immutable.Iterable.isIterable(state) ? state.toJS() : state),
-});
+const store = configureStore({}, history);
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-    }) : compose;
+const render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Routes />
+    </Provider>,
+    document.getElementById('root'),
+  );
+}
 
-// const history = createHistory();
-const sagaMiddleware = createSagaMiddleware();
-const middleware = composeEnhancers(applyMiddleware(sagaMiddleware, logger, routerMiddleware(history)));
+if (module.hot) {
+	module.hot.accept(['./routes'], () => {
+		ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+		render();
+	});
+}
 
-const store = middleware(createStore)(reducer);
-
-sagaMiddleware.run(sagas);
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Routes />
-  </Provider>,
-  document.getElementById('root'),
-);
+render();
 registerServiceWorker();
 

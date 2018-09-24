@@ -28,7 +28,6 @@ const candidateScheme = Yup.object().shape({
 
 const App = props => (
   <Grid container justify="center">
-    {console.log('WTF')}
     <Formik
       enableReinitialize={true}
         initialValues={props.candidate.toJS()}
