@@ -1,4 +1,6 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import {
+  takeEvery, put, call, select,
+} from 'redux-saga/effects';
 import ac, { actions } from './actions';
 import api from './api';
 
@@ -6,7 +8,7 @@ function* fetchQuestions() {
   const state = yield select();
 
   let questions;
-  if ( ! state.getIn(['questions', 'questionFetched'])) {
+  if (!state.getIn(['questions', 'questionFetched'])) {
     questions = yield call(api.fetch);
   } else {
     questions = state.getIn(['questions', 'questionList']);

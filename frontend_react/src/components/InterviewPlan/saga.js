@@ -1,4 +1,6 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import {
+  takeEvery, put, call, select,
+} from 'redux-saga/effects';
 import ac, { actions } from './actions';
 import api from './api';
 
@@ -24,9 +26,7 @@ function* getInterviewPlan({ payload }) {
 
 function* addQuestion({ payload }) {
   const state = yield select();
-  const question = state.getIn(['questions', 'questionList']).find(q => {
-    return q.get('_id') === payload.questionId;
-  });
+  const question = state.getIn(['questions', 'questionList']).find(q => q.get('_id') === payload.questionId);
 
   yield put(ac.addQuestionToInterviewPlan(question));
 }

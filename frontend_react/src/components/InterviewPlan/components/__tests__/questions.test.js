@@ -2,10 +2,8 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount } from 'enzyme';
 import { fromJS } from 'immutable';
-import sinon from 'sinon';
 import ListItem from '@material-ui/core/ListItem';
-import Checkbox from '@material-ui/core/Checkbox';
-import { App as Questions } from '../questions';
+import { QuestionsList as Questions } from '../questions';
 import data from './data';
 
 Enzyme.configure({ adapter: new Adapter() });

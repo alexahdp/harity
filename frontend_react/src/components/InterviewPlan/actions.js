@@ -21,20 +21,62 @@ export const actions = {
 };
 
 export default {
-  addQuestion: createAction(actions.ADD_QUESTION, questionId => ({ questionId })),
-  addQuestionToInterviewPlan: createAction(actions.ADD_QUESTION_TO_INTERVIEW_PLAN, question => ({ question })),
-  removeQuestion: createAction(actions.REMOVE_QUESTION, questionId => ({ questionId })),
+  addQuestion: createAction(
+    actions.ADD_QUESTION,
+    questionId => ({ questionId }),
+  ),
+  addQuestionToInterviewPlan: createAction(
+    actions.ADD_QUESTION_TO_INTERVIEW_PLAN,
+    question => ({ question }),
+  ),
+  createNewInterviewPlan: createAction(
+    actions.CREATE_INTERVIEW_PLAN,
+    history => ({ history }),
+  ),
   fetchInterviewPlans: createAction(actions.FETCH_INTERVIEWPLANS),
-  fetchInterviewPlansSuccess: createAction(actions.FETCH_INTERVIEWPLANS_SUCCESS, interviewPlans => ({ interviewPlans })),
-  save: createAction(actions.SAVE, history => ({ history })),
-  saveSuccess: createAction(actions.SAVE_SUCCESS, interviewPlan => ({ interviewPlan })),
-  setTitle: createAction(actions.SET_TITLE, title => ({ title })),
-  getInterviewPlan: createAction(actions.GET_INTERVIEW_PLAN, interviewPlanId => ({ interviewPlanId })),
-  setInterviewPlan: createAction(actions.SET_INTERVIEW_PLAN, interviewPlan => ({ interviewPlan })),
-  removeInterviewPlan: createAction(actions.REMOVE_INTERVIEW_PLAN, interviewPlanId => ({ interviewPlanId })),
-  removeInterviewPlanSuccess: createAction(actions.REMOVE_INTERVIEW_PLAN_SUCCESS, interviewPlanId => ({ interviewPlanId })),
+  fetchInterviewPlansSuccess: createAction(
+    actions.FETCH_INTERVIEWPLANS_SUCCESS,
+    interviewPlans => ({ interviewPlans }),
+  ),
+  getInterviewPlan: createAction(
+    actions.GET_INTERVIEW_PLAN,
+    interviewPlanId => ({ interviewPlanId }),
+  ),
+  moveUpQuestion: createAction(
+    actions.MOVE_UP_QUESTION,
+    questionId => ({ questionId }),
+  ),
+  moveDownQuestion: createAction(
+    actions.MOVE_DOWN_QUESTION,
+    questionId => ({ questionId }),
+  ),
+  removeQuestion: createAction(
+    actions.REMOVE_QUESTION,
+    questionId => ({ questionId }),
+  ),
+  save: createAction(
+    actions.SAVE,
+    history => ({ history }),
+  ),
+  saveSuccess: createAction(
+    actions.SAVE_SUCCESS,
+    interviewPlan => ({ interviewPlan }),
+  ),
+  setTitle: createAction(
+    actions.SET_TITLE,
+    title => ({ title }),
+  ),
+  setInterviewPlan: createAction(
+    actions.SET_INTERVIEW_PLAN,
+    interviewPlan => ({ interviewPlan }),
+  ),
+  removeInterviewPlan: createAction(
+    actions.REMOVE_INTERVIEW_PLAN,
+    interviewPlanId => ({ interviewPlanId }),
+  ),
+  removeInterviewPlanSuccess: createAction(
+    actions.REMOVE_INTERVIEW_PLAN_SUCCESS,
+    interviewPlanId => ({ interviewPlanId }),
+  ),
   resetCurrentInterviewPlan: createAction(actions.RESET_CURRENT),
-  createNewInterviewPlan: createAction(actions.CREATE_INTERVIEW_PLAN, history => ({ history })),
-  moveUpQuestion: createAction(actions.MOVE_UP_QUESTION, questionId => ({ questionId })),
-  moveDownQuestion: createAction(actions.MOVE_DOWN_QUESTION, questionId => ({ questionId })),
 };

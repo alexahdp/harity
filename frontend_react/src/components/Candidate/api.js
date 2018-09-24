@@ -13,18 +13,6 @@ export default {
   },
 
   async fetchList() {
-    return [
-      {
-        _id: 'sdfdsd',
-        email: 'alex@gmail.com',
-        firstName: 'alex',
-        lastName: 'pezikov',
-        birthYear: 1989,
-        level: 'senior',
-        description: 'first in list',
-      }
-    ];
-
     const result = await axios.get('/api/candidates');
     return result.data;
   },
@@ -36,5 +24,5 @@ export default {
 
   async remove(candidateId) {
     await axios.delete(`/api/candidate/${candidateId}`);
-  }
-}
+  },
+};

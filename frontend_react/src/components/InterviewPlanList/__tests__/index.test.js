@@ -8,8 +8,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { fromJS } from 'immutable';
 import sinon from 'sinon';
 import styles from '../assets/list.css';
-import InterviewPlanListWithContainer, { App as InterviewPlanList } from '../index';
-import reducers from '../../../reducers/index';
+import InterviewPlanListWithContainer, { InterviewPlanList } from '../index';
+import reducers from '../../../reducers';
 import data from './data';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -24,7 +24,7 @@ describe('InterviewPlanList render', () => {
     };
 
     const preview = shallow(<InterviewPlanList {...props} />);
-    const text = preview.find(`h3`).text();
+    const text = preview.find('h3').text();
     expect(text).toEqual('Список пуст');
   });
 
@@ -32,7 +32,7 @@ describe('InterviewPlanList render', () => {
     const store = createStore(reducers, fromJS(data));
 
     const preview = mount(
-      <InterviewPlanListWithContainer store={store} />
+      <InterviewPlanListWithContainer store={store} />,
     );
 
     const renderedPreview = preview.render();
@@ -43,11 +43,11 @@ describe('InterviewPlanList render', () => {
   it('click edit', () => {
     const store = createStore(reducers, fromJS(data));
     const history = {
-      push: sinon.fake()
+      push: sinon.fake(),
     };
 
     const preview = mount(
-      <InterviewPlanListWithContainer store={store} history={history} />
+      <InterviewPlanListWithContainer store={store} history={history} />,
     );
 
     preview.find(EditIcon).simulate('click');

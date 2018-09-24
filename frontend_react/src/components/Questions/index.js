@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import actions from './actions';
+import ac from './actions';
 import QuestionList from './List';
 import QuestionForm from './Form';
 
@@ -10,7 +12,17 @@ class App extends Component {
     this.props.fetchQuestions();
   }
 
-  addQuestion = (question) => {
+  propTypes = {
+    addQuestion: PropTypes.func.isRequired,
+    editQuestion: PropTypes.instanceOf(Immutable.Map).isRequired,
+    fetchQuestions: PropTypes.func.isRequired,
+    setEditQuestion: PropTypes.func.isRequired,
+    questions: PropTypes.instanceOf(Immutable.List).isRequired,
+    removeQuestion: PropTypes.func.isRequired,
+    updateQuestion: PropTypes.func.isRequired,
+  }
+
+  addQuestion = question => {
     this.props.addQuestion(question);
   }
 
@@ -49,12 +61,12 @@ const ContainerApp = connect(
     editQuestion: state.getIn(['questions', 'editQuestion']),
   }),
   {
-    fetchQuestions: actions.fetchQuestions,
-    addQuestion: actions.addQuestion,
-    updateQuestion: actions.updateQuestion,
-    setEditQuestion: actions.editQuestion,
-    removeQuestion: actions.removeQuestion,
-  }
+    fetchQuestions: ac.fetchQuestions,
+    addQuestion: ac.addQuestion,
+    updateQuestion: ac.updateQuestion,
+    setEditQuestion: ac.editQuestion,
+    removeQuestion: ac.removeQuestion,
+  },
 )(App);
 
 export { App };

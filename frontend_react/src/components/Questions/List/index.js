@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,6 +19,12 @@ class App extends Component {
     };
 
     this.setFilterTag = this.setFilterTag.bind(this);
+  }
+
+  propTypes = {
+    editHandle: PropTypes.func.isRequired,
+    questions: PropTypes.instanceOf(Immutable.List).isRequired,
+    removeHandle: PropTypes.func.isRequired,
   }
 
   setFilterTag(e) {
@@ -73,7 +81,7 @@ class App extends Component {
                 </div>
                 <p className={styles.text}>{question.get('text')}</p>
               </ListItem>
-          ))}
+            ))}
         </List>
       </div>
     );

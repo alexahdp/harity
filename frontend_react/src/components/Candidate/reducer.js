@@ -21,7 +21,7 @@ const candidate = handleActions(
     [actions.CANDIDATE_SET_PROP](state, action) {
       return state.setIn(
         ['currentCandidate', action.payload.property],
-        action.payload.value
+        action.payload.value,
       );
     },
     [actions.CANDIDATE_FETCH_LIST_SUCCESS](state, action) {
@@ -34,7 +34,7 @@ const candidate = handleActions(
       return state.set('currentCandidate', Immutable.Map(action.payload.candidate));
     },
   },
-  Immutable.fromJS(initialState)
+  Immutable.fromJS(initialState),
 );
 
 export default candidate;

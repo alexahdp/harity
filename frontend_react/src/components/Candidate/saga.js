@@ -1,4 +1,4 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 import ac, { actions } from './actions';
 import history from '../../history';
 import api from './api';
@@ -8,8 +8,8 @@ function* save({ payload }) {
     const savedCandidate = yield call(api.save, payload.candidate);
     yield put(ac.saveSuccess(savedCandidate));
     history.replace(`/candidate/${savedCandidate._id}`);
-  } catch(err) {
-    console.log('Error', err);
+  } catch (err) {
+    console.log('Error', err); // eslint-disable-line no-console
   }
 }
 

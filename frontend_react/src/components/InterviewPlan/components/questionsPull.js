@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -8,11 +10,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import questionsActions from '../../Questions/actions';
-import actions from '../actions';
+import ac from '../actions';
 import { getCurrentInterviewQuestionsMap } from '../../../selectors/questionsToMap';
 import styles from '../assets/index.css';
 
-class App extends PureComponent {
+class QuestionsPull extends PureComponent {
   constructor() {
     super();
 
@@ -21,6 +23,14 @@ class App extends PureComponent {
     };
 
     this.setFilterTag = this.setFilterTag.bind(this);
+  }
+
+  propTypes = {
+    addQuestion: PropTypes.func.isRequired,
+    currentInterviewQuestionsMap: PropTypes.instanceOf(Immutable.Map).isRequired,
+    fetchQuestions: PropTypes.func.isRequired,
+    getInterviewPlan: PropTypes.func.isRequired,
+    questions: PropTypes.instanceOf(Immutable.List).isRequired,
   }
 
   setFilterTag(e) {
@@ -48,7 +58,7 @@ class App extends PureComponent {
 
         <List>
           {this.props.questions
-            .filter(question => ( ! this.props.currentInterviewQuestionsMap[question.get('_id')]))
+            .filter(question => (!this.props.currentInterviewQuestionsMap[question.get('_id')]))
             .filter(question => {
               if (this.state.filterTag !== '') {
                 return question.get('labels').some(label => label.includes(this.state.filterTag));
@@ -68,7 +78,7 @@ class App extends PureComponent {
                     <Chip
                       key={label}
                       label={label}
-                      classes={{label: styles.questionTag}}
+                      classes={{ label: styles.questionTag }}
                     />
                   ))}
                 </div>
@@ -78,8 +88,7 @@ class App extends PureComponent {
                 <Checkbox
                   onChange={() => this.props.addQuestion(question.get('_id'))}
                 />
-              </ListItem>)
-            )
+              </ListItem>))
           }
         </List>
       </Grid>
@@ -87,17 +96,16 @@ class App extends PureComponent {
   }
 }
 
-const ContainerApp = connect(
+const ContainerQuestionsPull = connect(
   state => ({
     questions: state.getIn(['questions', 'questionList']),
     currentInterviewQuestionsMap: getCurrentInterviewQuestionsMap(state),
   }),
   {
-    addQuestion: actions.addQuestion,
+    addQuestion: ac.addQuestion,
     fetchQuestions: questionsActions.fetchQuestions,
-    getInterviewPlan: actions.getInterviewPlan,
-  }
-)(App);
+    getInterviewPlan: ac.getInterviewPlan,
+  },
+)(QuestionsPull);
 
-export { App };
-export default ContainerApp;
+export default ContainerQuestionsPull;

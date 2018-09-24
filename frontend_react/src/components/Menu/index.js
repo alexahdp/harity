@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom'
-
+import { Link, withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,7 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { withRouter } from 'react-router-dom';
+
 const classes = {};
 const ITEM_HEIGHT = 48;
 
@@ -47,8 +46,7 @@ class App extends PureComponent {
       },
     };
 
-    const MyMenu = withRouter(({ history }) => {
-      return (
+    const MyMenu = withRouter(({ history }) => (
         <Menu
           open={open}
           onClose={this.handleClose}
@@ -68,8 +66,7 @@ class App extends PureComponent {
             </MenuItem>
           ))}
         </Menu>
-      );
-    });
+    ));
 
     const CurrentLocation = withRouter(({ history }) => (
       <Typography
@@ -78,10 +75,9 @@ class App extends PureComponent {
         className={classes.flex}
       >
         {
-          menuItems[history.location.pathname] ?
-            menuItems[history.location.pathname].title
-            :
-            ''
+          menuItems[history.location.pathname]
+            ? menuItems[history.location.pathname].title
+            : ''
         }
       </Typography>
     ));

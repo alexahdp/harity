@@ -6,14 +6,14 @@ const interviewPlan = handleActions({
   [actions.ADD_QUESTION_TO_INTERVIEW_PLAN](state, action) {
     return state.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.push(action.payload.question)
+      questions => questions.push(action.payload.question),
     );
   },
 
   [actions.REMOVE_QUESTION](state, action) {
     return state.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.filter(question => question.get('_id') !== action.payload.questionId)
+      questions => questions.filter(question => question.get('_id') !== action.payload.questionId),
     );
   },
 
@@ -22,11 +22,11 @@ const interviewPlan = handleActions({
   },
 
   [actions.SAVE_SUCCESS](state, action) {
-    const interviewPlan = Immutable.fromJS(action.payload.interviewPlan);
+    const interviewPlanObj = Immutable.fromJS(action.payload.interviewPlan);
 
     let newState = state;
-    if ( ! state.getIn(['interviewPlan', '_id'])) {
-      newState = newState.update('list', interviewPlans => interviewPlans.push(interviewPlan));
+    if (!state.getIn(['interviewPlan', '_id'])) {
+      newState = newState.update('list', interviewPlans => interviewPlans.push(interviewPlanObj));
     }
 
     newState = newState.setIn(['interviewPlan'], interviewPlan);
@@ -42,9 +42,7 @@ const interviewPlan = handleActions({
   },
 
   [actions.REMOVE_INTERVIEW_PLAN_SUCCESS](state, action) {
-    return state.update('list', list => {
-      return list.filter(ip => ip.get('_id') !== action.payload.interviewPlanId);
-    })
+    return state.update('list', list => list.filter(ip => ip.get('_id') !== action.payload.interviewPlanId));
   },
 
   [actions.RESET_CURRENT](state) {
@@ -58,9 +56,7 @@ const interviewPlan = handleActions({
   },
 
   [actions.MOVE_UP_QUESTION](state, action) {
-    const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => {
-      return question.get('_id') === action.payload.questionId;
-    });
+    const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => question.get('_id') === action.payload.questionId);
 
     if (index === 0) return state;
 
@@ -68,19 +64,17 @@ const interviewPlan = handleActions({
 
     const newState = state.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.splice(index, 1)
+      questions => questions.splice(index, 1),
     );
 
     return newState.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.splice(index - 1, 0, question)
+      questions => questions.splice(index - 1, 0, question),
     );
   },
 
   [actions.MOVE_DOWN_QUESTION](state, action) {
-    const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => {
-      return question.get('_id') === action.payload.questionId;
-    });
+    const index = state.getIn(['interviewPlan', 'questions']).findIndex(question => question.get('_id') === action.payload.questionId);
 
     if (index === state.getIn(['interviewPlan', 'questions']).size) return state;
 
@@ -88,12 +82,12 @@ const interviewPlan = handleActions({
 
     const newState = state.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.splice(index, 1)
+      questions => questions.splice(index, 1),
     );
 
     return newState.updateIn(
       ['interviewPlan', 'questions'],
-      questions => questions.splice(index + 1, 0, question)
+      questions => questions.splice(index + 1, 0, question),
     );
   },
 },

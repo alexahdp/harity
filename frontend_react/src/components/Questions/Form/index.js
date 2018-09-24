@@ -1,4 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -22,7 +24,13 @@ class App extends PureComponent {
     this.setComplexity = this.setComplexity.bind(this);
   }
 
-  componentWillReceiveProps(props) {
+  propTypes = {
+    addQuestion: PropTypes.func.isRequired,
+    editQuestion: PropTypes.instanceOf(Immutable.Map).isRequired,
+    updateQuestion: PropTypes.func.isRequired,
+  }
+
+  componentWillReceiveProps(props) { // eslint-disable-line react/no-deprecated
     this.setState({
       _id: props.editQuestion.get('_id'),
       complexity: props.editQuestion.get('complexity'),

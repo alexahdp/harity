@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import actions from './actions';
+import ac from './actions';
 import QuestionsPull from './components/questionsPull';
 import Questions from './components/questions';
 
@@ -14,19 +16,30 @@ class App extends PureComponent {
     this.save = this.save.bind(this);
   }
 
+  propTypes = {
+    match: PropTypes.any.isRequired,
+    getInterviewPlan: PropTypes.func.isRequired,
+    history: PropTypes.any.isRequired,
+    interviewPlan: PropTypes.instanceOf(Immutable.Map).isRequired,
+    save: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     if (
-      this.props.match.params.interviewPlanId !== this.props.interviewPlan.get('_id') &&
-      this.props.match.params.interviewPlanId
+      this.props.match.params.interviewPlanId !== this.props.interviewPlan.get('_id')
+      && this.props.match.params.interviewPlanId
     ) {
       this.props.getInterviewPlan(this.props.match.params.interviewPlanId);
     }
   }
 
+  /* eslint-disable */
   componentWillReceiveProps(props) {
+  /* eslint-enable */
     if (
-      props.match.params.interviewPlanId !== props.interviewPlan.get('_id') &&
-      props.match.params.interviewPlanId
+      props.match.params.interviewPlanId !== props.interviewPlan.get('_id')
+      && props.match.params.interviewPlanId
     ) {
       props.getInterviewPlan(props.match.params.interviewPlanId);
     }
@@ -78,10 +91,10 @@ const ContainerApp = connect(
     interviewPlan: state.getIn(['interviewPlan', 'interviewPlan']),
   }),
   {
-    setTitle: actions.setTitle,
-    save: actions.save,
-    getInterviewPlan: actions.getInterviewPlan,
-  }
+    setTitle: ac.setTitle,
+    save: ac.save,
+    getInterviewPlan: ac.getInterviewPlan,
+  },
 )(App);
 
 export { App };

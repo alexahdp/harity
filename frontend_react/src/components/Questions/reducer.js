@@ -12,7 +12,7 @@ const questions = handleActions({
   [actions.ADD_QUESTION_SUCCESS](state, action) {
     return state.update(
       'questionList',
-      questionList => questionList.push(Immutable.fromJS(action.payload.question))
+      questionList => questionList.push(Immutable.fromJS(action.payload.question)),
     );
   },
 
@@ -23,9 +23,7 @@ const questions = handleActions({
 
   [actions.UPDATE_QUESTION_SUCCESS](state, action) {
     const updatedQuestion = Immutable.fromJS(action.payload.question);
-    let newState = state.update('questionList', list => list.map(question => {
-      return question.get('_id') === updatedQuestion.get('_id') ? updatedQuestion : question;
-    }));
+    let newState = state.update('questionList', list => list.map(question => (question.get('_id') === updatedQuestion.get('_id') ? updatedQuestion : question)));
 
     if (newState.getIn(['editQuestion', '_id']) === action.payload.question._id) {
       newState = newState.set('editQuestion', updatedQuestion);
@@ -44,9 +42,7 @@ const questions = handleActions({
   },
 
   [actions.REMOVE_QUESTION_SUCCESS](state, action) {
-    return state.update('questionList', questionList => {
-      return questionList.filter(q => q.get('_id') !== action.payload.questionId);
-    });
+    return state.update('questionList', questionList => questionList.filter(q => q.get('_id') !== action.payload.questionId));
   },
 },
 Immutable.fromJS({
@@ -58,7 +54,6 @@ Immutable.fromJS({
     labels: [],
     text: '',
   },
-}),
-);
+}));
 
 export default questions;

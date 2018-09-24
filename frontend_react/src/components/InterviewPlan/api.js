@@ -26,5 +26,5 @@ export default {
 
   async removeInterviewPlan(interviewPlanId) {
     await axios.delete(`/api/interviewPlan/${interviewPlanId}`);
-  }
+  },
 };

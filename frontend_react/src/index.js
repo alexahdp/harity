@@ -1,4 +1,3 @@
-/* global NODE_ENV */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -16,15 +15,14 @@ const render = () => {
     </Provider>,
     document.getElementById('root'),
   );
-}
+};
 
 if (module.hot) {
-	module.hot.accept(['./routes'], () => {
-		ReactDOM.unmountComponentAtNode(document.getElementById('root'));
-		render();
-	});
+  module.hot.accept(['./routes'], () => {
+    ReactDOM.unmountComponentAtNode(document.getElementById('root'));
+    render();
+  });
 }
 
 render();
 registerServiceWorker();
-
