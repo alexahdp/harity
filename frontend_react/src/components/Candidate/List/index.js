@@ -20,23 +20,26 @@ function CandidateList(props) {
   return (
     <Grid container spasing={32} justify="space-evenly">
       <Grid item xs={6}>
-        <List>
-          {props.candidates.map(candidate => (
-            <ListItem key={candidate.get('_id')}>
-              <ListItemText>
-                {`${candidate.get('firstName')} ${candidate.get('lastName')}`}
-              </ListItemText>
-              <ListItemSecondaryAction>
-                  <IconButton>
-                    <EditIcon onClick={() => props.gotoCandidate(candidate.get('_id'))} />
-                  </IconButton>
-                  <IconButton>
-                    <DeleteIcon onClick={() => props.removeCandidate(candidate.get('_id'))}/>
-                  </IconButton>
-                </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </List>
+        { (props.candidates.size === 0)
+          ? (<h3>Список пуст</h3>)
+          : <List>
+            {props.candidates.map(candidate => (
+              <ListItem key={candidate.get('_id')}>
+                <ListItemText>
+                  {`${candidate.get('firstName')} ${candidate.get('lastName')}`}
+                </ListItemText>
+                <ListItemSecondaryAction>
+                    <IconButton>
+                      <EditIcon onClick={() => props.gotoCandidate(candidate.get('_id'))} />
+                    </IconButton>
+                    <IconButton>
+                      <DeleteIcon onClick={() => props.removeCandidate(candidate.get('_id'))}/>
+                    </IconButton>
+                  </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        }
 
         <Button
           onClick={props.addCandidate}

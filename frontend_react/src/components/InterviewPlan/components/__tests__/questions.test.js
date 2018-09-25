@@ -12,7 +12,14 @@ describe('InterviewPlan questions list', () => {
   it('render with two questions', () => {
     const interviewPlan = fromJS(data).get('interviewPlan');
 
-    const preview = mount(<Questions interviewPlan={interviewPlan} />);
+    const props = {
+      interviewPlan,
+      moveUpQuestion: () => 1,
+      moveDownQuestion: () => 1,
+      removeQuestion: () => 1,
+    };
+
+    const preview = mount(<Questions {...props} />);
     expect(preview.find(ListItem).length).toBe(2);
   });
 

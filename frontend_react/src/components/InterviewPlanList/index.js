@@ -57,7 +57,10 @@ function InterviewPlanList(props) {
 
 InterviewPlanList.propTypes = {
   createNewInterviewPlan: PropTypes.func.isRequired,
-  history: PropTypes.instanceOf(Immutable.Map).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired,
+  }).isRequired,
   interviewPlanList: PropTypes.instanceOf(Immutable.List).isRequired,
   openInterviewPlan: PropTypes.func.isRequired,
   removeInterviewPlan: PropTypes.func.isRequired,
