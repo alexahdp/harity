@@ -1,7 +1,7 @@
-import Question from '../model/question.ts';
+import Question from '../model/question';
 
 export default {
-  async create(ctx:any) {
+  async create(ctx) {
     const question = new Question({
       text: ctx.request.body.text,
       labels: ctx.request.body.labels,
@@ -14,21 +14,23 @@ export default {
     ctx.body = question;
   },
 
-  async read(ctx:any) {
-    const question = await Question.findOne({_id: ctx.params.questionId}).exec();
+  async read(ctx) {
+    const question = await Question.findOne({ _id: ctx.params.questionId }).exec();
     if (question === null) {
       ctx.status = 404;
-      return ctx.body = {success: false};
+      ctx.body = { success: false };
+      return;
     }
 
     ctx.body = question;
   },
 
-  async update(ctx:any) {
-    const question = await Question.findOne({_id: ctx.params.questionId}).exec();
+  async update(ctx) {
+    const question = await Question.findOne({ _id: ctx.params.questionId }).exec();
     if (question === null) {
       ctx.status = 404;
-      return ctx.body = {success: false};
+      ctx.body = { success: false };
+      return;
     }
 
     // TODO maybe it is possible to do it in some better way
@@ -40,23 +42,24 @@ export default {
     ctx.body = question;
   },
 
-  async remove(ctx:any) {
-    const question = await Question.findOne({_id: ctx.params.questionId}).exec();
+  async remove(ctx) {
+    const question = await Question.findOne({ _id: ctx.params.questionId }).exec();
     if (question === null) {
       ctx.status = 404;
-      return ctx.body = {success: false};
+      ctx.body = { success: false };
+      return;
     }
 
     await question.remove();
-    ctx.body = {success: true};
+    ctx.body = { success: true };
   },
 
-  async list(ctx:any) {
+  async list(ctx) {
     const questions = await Question.find().exec();
     ctx.body = questions;
   },
 
-  async tagList(ctx:any) {
+  async tagList(ctx) {
     ctx.body = Question.getTagList();
   },
 };

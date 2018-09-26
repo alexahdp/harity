@@ -1,15 +1,15 @@
-import User from '../model/user.ts';
+import User from '../model/user';
 
 export default {
 
-  test(ctx:any) {
+  test(ctx) {
     ctx.response.status = 200;
-    ctx.body = {msg: 'Success'};
+    ctx.body = { msg: 'Success' };
   },
 
-  async authBridge(ctx:any, next:any) {
+  async authBridge(ctx, next) {
     if (ctx.session.userId) {
-      const user = await User.findOne({_id: ctx.session.userId}).exec();
+      const user = await User.findOne({ _id: ctx.session.userId }).exec();
       if (user !== null) {
         ctx.user = user;
         await next();
@@ -21,22 +21,22 @@ export default {
     ctx.body = 'Access denied';
   },
 
-  async signIn(ctx:any) {
-    const user = await User.findOne({email: ctx.request.body.email}).exec();
+  async signIn(ctx) {
+    const user = await User.findOne({ email: ctx.request.body.email }).exec();
     if (user === null) {
       ctx.status = 404;
-      ctx.body = {success: false};
+      ctx.body = { success: false };
       return;
     }
 
     ctx.session.userId = user._id.toString();
-    ctx.body = {success: true};
+    ctx.body = { success: true };
   },
 
-  async signUp(ctx:any) {
-    if ( ! ctx.request.body) {
+  async signUp(ctx) {
+    if (!ctx.request.body) {
       ctx.status = 403;
-      ctx.body = {success: false};
+      ctx.body = { success: false };
       return;
     }
 
@@ -47,6 +47,6 @@ export default {
 
     await user.save();
 
-    ctx.body = {success: true};
+    ctx.body = { success: true };
   },
 };

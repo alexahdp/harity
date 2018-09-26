@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc src/**/*.ts && npm nodemon build/server.js",
-    "nodemon": "npx nodemon -w build/server.js build/server.js",
-    "lint": "npx tslint -p tsconfig.json -c tslint.json src/**/*.ts",
+    "start": "npx nodemon --experimental-modules src/server.js",
+    "lint": "npx eslint src/**/*.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint"
+    }
   },
   "author": "alexahdp",
   "license": "MIT",
@@ -19,17 +23,13 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.2",
     "lodash": "^4.17.11",
-    "mongoose": "^5.2.7",
-    "source-map-support": "^0.5.8",
-    "typescript": "^3.0.1"
+    "mongoose": "^5.2.7"
   },
   "devDependencies": {
-    "@types/node": "^10.5.8",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "husky": "^0.14.3",
-    "nodemon": "^1.18.3",
-    "ts-loader": "^4.4.2",
-    "tslint": "^5.11.0",
-    "webpack": "^4.16.5",
-    "webpack-cli": "^3.1.0"
+    "nodemon": "^1.18.3"
   }
 }

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import conf from '../config/appconf.ts';
+import conf from '../config/appconf';
 
 const Question = new mongoose.Schema({
   text: {
@@ -9,7 +9,7 @@ const Question = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   labels: [{
     type: String,
@@ -19,10 +19,10 @@ const Question = new mongoose.Schema({
   }],
   complexity: {
     type: Number,
-  }
+  },
 });
 
-Question.statics.getTagList = function() {
+Question.statics.getTagList = function () {
   return conf.questionTags;
 };
 

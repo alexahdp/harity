@@ -1,22 +1,21 @@
-require('source-map-support').install();
-
 import Koa from 'koa';
 import cors from '@koa/cors';
-import Router = require('koa-router');
+import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 import logger from 'koa-logger';
 import session from 'koa-session';
 
-import conf from './config/appconf.ts';
-import user from './routes/user.ts';
-import question from './routes/question.ts';
-import interviewPlan from './routes/interviewPlan.ts';
-import candidate from './routes/candidate.ts';
+import conf from './config/appconf';
+import user from './routes/user';
+import question from './routes/question';
+import interviewPlan from './routes/interviewPlan';
+import candidate from './routes/candidate';
 
 mongoose.connect(conf.db.url);
+
 const db = mongoose.connection;
-db.on('error', (err:any) => {
+db.on('error', (err) => {
   console.log('Connect database error');
   console.log(err);
 });
@@ -67,7 +66,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.on('error', (err:any, ctx:any) => {
+app.on('error', (err, ctx) => {
   console.log('FATAL ERROR');
   console.log(err);
 });
