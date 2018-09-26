@@ -2,7 +2,7 @@ version: "3"
 services:
   backend:
     image: node:latest
-    command: npx webpack --watch
+    command: npm run start
     network_mode: "host"
     # ports:
     #   - "3001:3001"
