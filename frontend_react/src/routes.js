@@ -9,10 +9,12 @@ import InterviewPlan from './components/InterviewPlan';
 import Candidate from './components/Candidate';
 import CandidateList from './components/Candidate/List';
 
+
 const App = () => (
   <Router>
     <div>
       <Menu />
+
 
       <Route
         exact
