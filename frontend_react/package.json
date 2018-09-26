@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "NODE_ENV=development PORT=3002 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "npx jest --ci --env=jsdom",
     "test-watch": "node scripts/test.js --env=jsdom",

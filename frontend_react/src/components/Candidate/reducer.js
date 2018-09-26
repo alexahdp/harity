@@ -16,7 +16,7 @@ const initialState = {
   list: [],
 };
 
-const candidate = handleActions(
+export default handleActions(
   {
     [actions.CANDIDATE_SET_PROP](state, action) {
       return state.setIn(
@@ -33,8 +33,12 @@ const candidate = handleActions(
     [actions.CANDIDATE_FETCH_SUCCESS](state, action) {
       return state.set('currentCandidate', Immutable.Map(action.payload.candidate));
     },
+    [actions.CANDIDATE_REMOVE_SUCCESS](state, action) {
+      return state.update(
+        'list',
+        candidates => candidates.filter(candidate => candidate.get('_id') === action.payload.candidateId),
+      );
+    },
   },
   Immutable.fromJS(initialState),
 );
-
-export default candidate;

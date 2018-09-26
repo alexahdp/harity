@@ -9,6 +9,7 @@ export const actions = {
   CANDIDATE_FETCH_LIST_SUCCESS: ga('CANDIDATE_FETCH_LIST_SUCCESS'),
 
   CANDIDATE_REMOVE: ga('CANDIDATE_REMOVE'),
+  CANDIDATE_REMOVE_SUCCESS: ga('CANDIDATE_REMOVE_SUCCESS'),
 
   CANDIDATE_RESET_CURRENT: ga('CANDIDATE_RESET_CURRENT'),
 
@@ -25,7 +26,8 @@ export default {
   fetchList: ca(actions.CANDIDATE_FETCH_LIST),
   fetchListSuccess: ca(actions.CANDIDATE_FETCH_LIST_SUCCESS, candidates => ({ candidates })),
 
-  remove: ca(actions.CANDIDATE_REMOVE),
+  remove: ca(actions.CANDIDATE_REMOVE, candidateId => ({ candidateId })),
+  removeSuccess: ca(actions.CANDIDATE_REMOVE_SUCCESS, candidateId => ({ candidateId })),
 
   resetCurrent: ca(actions.CANDIDATE_RESET_CURRENT),
 

@@ -29,8 +29,9 @@ export default {
   },
 
   async delete(ctx:any) {
-    const candidate = await Candidate.findOne({_id: ctx.requqst.params.candidateId}).exec();
+    const candidate = await Candidate.findOne({_id: ctx.params.candidateId}).exec();
     await candidate.remove();
+    ctx.status = 200;
   },
 
   async create(ctx:any) {
