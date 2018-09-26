@@ -29,7 +29,7 @@ const interviewPlan = handleActions({
       newState = newState.update('list', interviewPlans => interviewPlans.push(interviewPlanObj));
     }
 
-    newState = newState.setIn(['interviewPlan'], interviewPlan);
+    newState = newState.setIn(['interviewPlan'], interviewPlanObj);
     return newState;
   },
 
