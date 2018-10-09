@@ -4,18 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "cd ./backend && npm run lint && cd ../frontend && npm run lint",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "husky": {
-    "pre-commit": "npm run lint"
+    "pre-commit": "npm run test"
   },
   "author": "alexahdp",
   "license": "ISC",
-  "devDependencies": {
-    "husky": "^0.14.3"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "recompose": "^0.30.0"
+    "husky": "^1.0.1"
   }
 }

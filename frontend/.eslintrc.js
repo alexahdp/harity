@@ -1,37 +1,56 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
-  root: true,
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
+  "parser": "babel-eslint",
+
+  extends: [
+    'airbnb-base',
+    'plugin:react/recommended',
+    "plugin:flowtype/recommended"
+  ],
+
   env: {
     browser: true,
+    node: true,
+    "jest": true,
   },
-  // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-  // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-  extends: ['plugin:vue/essential', 'airbnb-base'],
-  // required to lint *.vue files
+
+  globals: {
+    'expect': true,
+    'chai': true,
+  },
+
   plugins: [
-    'vue'
+    "redux-saga",
+    'react',
+    'flowtype',
+    "jsx-a11y"
   ],
-  // check if imports actually resolve
+
+  parserOptions: {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+
   settings: {
     'import/resolver': {
       webpack: {
         config: 'build/webpack.base.conf.js'
       }
-    }
+    },
+    'react': {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.5",
+      "flowVersion": "0.2.3"
+    },
+    "propWrapperFunctions": [ "forbidExtraProps" ],
   },
   // add your custom rules here
   rules: {
+    'import/no-named-as-default': ['off'],
     'no-underscore-dangle': ['off'],
-
-    // don't require .vue extension when importing
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never'
-    }],
 
     'arrow-parens': ['error', 'as-needed'],
 
@@ -40,9 +59,7 @@ module.exports = {
     'no-param-reassign': ['error', {
       props: true,
       ignorePropertyModificationsFor: [
-        'state', // for vuex state
-        'acc', // for reduce accumulators
-        'e' // for e.returnvalue
+
       ]
     }],
     // allow optionalDependencies
