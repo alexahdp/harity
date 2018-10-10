@@ -3,9 +3,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow, mount } from 'enzyme';
 import { fromJS } from 'immutable';
 import sinon from 'sinon';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { CandidateList } from '../index';
+import styles from '../assets/styles.css';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -14,6 +14,8 @@ describe('Candidate List', () => {
     const props = {
       addCandidate: () => 1,
       candidates: fromJS([]),
+      isShownFilterPanel: false,
+      toggleFilterPanel: () => 1,
       fetchCandidates: () => 1,
       gotoCandidate: () => 1,
       removeCandidate: () => 1,
@@ -29,6 +31,8 @@ describe('Candidate List', () => {
     const props = {
       addCandidate: sinon.fake(),
       candidates: fromJS([]),
+      isShownFilterPanel: false,
+      toggleFilterPanel: () => 1,
       fetchCandidates: () => 1,
       gotoCandidate: () => 1,
       removeCandidate: () => 1,
@@ -36,7 +40,9 @@ describe('Candidate List', () => {
     };
 
     const preview = mount(<CandidateList {...props} />);
-    preview.find(Button).simulate('click');
+    preview.find(`button.${styles.addCandidateButton}`).simulate('click');
+    // console.log(preview.children().debug())
+
     expect(props.addCandidate.callCount).toBe(1);
   });
 
@@ -53,6 +59,8 @@ describe('Candidate List', () => {
         description: 'Very smart',
         level: 'junior',
       }]),
+      isShownFilterPanel: false,
+      toggleFilterPanel: () => 1,
       fetchCandidates: () => 1,
       gotoCandidate: () => 1,
       removeCandidate: sinon.fake(),

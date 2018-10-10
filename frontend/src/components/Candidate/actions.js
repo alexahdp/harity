@@ -17,6 +17,9 @@ export const actions = {
   CANDIDATE_SAVE_SUCCESS: ga('CANDIDATE_SAVE_SUCCESS'),
 
   CANDIDATE_SET_PROP: ga('CANDIDATE_SET_PROP'),
+
+  CANDIDATE_LIST_SHOW_FILTER_PANEL: ga('CANDIDATE_LIST_SHOW_FILTER_PANEL'),
+  CANDIDATE_LIST_HIDE_FILTER_PANEL: ga('CANDIDATE_LIST_HIDE_FILTER_PANEL'),
 };
 
 export default {
@@ -35,4 +38,7 @@ export default {
   saveSuccess: ca(actions.CANDIDATE_SAVE_SUCCESS, candidate => ({ candidate })),
 
   setProperty: ca(actions.CANDIDATE_SET_PROP, (property, value) => ({ property, value })),
+
+  showFilterPanel: ca(actions.CANDIDATE_LIST_SHOW_FILTER_PANEL),
+  hideFilterPanel: ca(actions.CANDIDATE_LIST_HIDE_FILTER_PANEL),
 };

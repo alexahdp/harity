@@ -13,13 +13,22 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
+import FilterPanel from './filter';
 import ac from '../actions';
 import styles from './assets/styles.css';
+
 
 function CandidateList(props) {
   return (
     <Grid container spasing={32} justify="space-evenly">
       <Grid item xs={6}>
+        <Button
+          onClick={props.toggleFilterPanel}
+          variant="outlined"
+        >
+          Filters
+        </Button>
+        { props.isShownFilterPanel && <FilterPanel /> }
         { (props.candidates.size === 0)
           ? (<h3>Список пуст</h3>)
           : <List>
@@ -58,20 +67,25 @@ CandidateList.propTypes = {
   addCandidate: PropTypes.func.isRequired,
   candidates: PropTypes.instanceOf(Immutable.List).isRequired,
   fetchCandidates: PropTypes.func.isRequired,
+  isShownFilterPanel: PropTypes.bool.isRequired,
   gotoCandidate: PropTypes.func.isRequired,
   removeCandidate: PropTypes.func.isRequired,
   resetCurrentCandidate: PropTypes.func.isRequired,
+  toggleFilterPanel: PropTypes.func.isRequired,
 };
 
 const ContainerCandidateList = compose(
   connect(
     state => ({
       candidates: state.getIn(['candidates', 'list']),
+      isShownFilterPanel: state.getIn(['candidates', 'isShownFilterPanel']),
     }),
     {
       fetchCandidates: ac.fetchList,
+      hideFilterPanel: ac.hideFilterPanel,
       removeCandidate: ac.remove,
       resetCurrentCandidate: ac.resetCurrent,
+      showFilterPanel: ac.showFilterPanel,
     },
   ),
   withHandlers({
@@ -81,6 +95,13 @@ const ContainerCandidateList = compose(
     addCandidate: props => () => {
       props.resetCurrentCandidate();
       props.history.push('/candidate');
+    },
+    toggleFilterPanel: props => () => {
+      if (props.isShownFilterPanel) {
+        props.hideFilterPanel();
+      } else {
+        props.showFilterPanel();
+      }
     },
   }),
   lifecycle({

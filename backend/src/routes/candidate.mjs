@@ -1,8 +1,29 @@
 import _ from 'lodash';
 import Candidate from '../model/candidate';
 
-const attrs = ['email', 'firstName', 'lastName', 'description'];
-const publicAttrs = ['_id', 'email', 'firstName', 'lastName', 'description', 'createdAt'];
+// атрибуты, которые приходят с клиента для сохранения в БД
+const attrs = [
+  'email',
+  'sex',
+  'firstName',
+  'middleName',
+  'lastName',
+  'description',
+  'experienceTags',
+];
+
+// атрибуты, которые уходят на клиент из БД
+const publicAttrs = [
+  '_id',
+  'sex',
+  'contacts',
+  'firstName',
+  'middleName',
+  'lastName',
+  'description',
+  'createdAt',
+  'experienceTags',
+];
 
 export default {
   async get(ctx) {
