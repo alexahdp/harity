@@ -7,7 +7,7 @@ import Questions from './components/Questions';
 import Menu from './components/Menu/index';
 import InterviewPlan from './components/InterviewPlan';
 import Candidate from './components/Candidate';
-import CandidateList from './components/Candidate/List';
+import CandidateList from './components/CandidateList';
 
 
 const App = () => (

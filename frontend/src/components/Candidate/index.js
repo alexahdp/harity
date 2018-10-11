@@ -223,7 +223,7 @@ Candidate.propTypes = {
 const ContainerCandidate = compose(
   connect(
     state => ({
-      candidate: state.getIn(['candidates', 'currentCandidate']),
+      candidate: state.getIn(['candidate', 'currentCandidate']),
     }),
     {
       save: ac.save,

@@ -13,16 +13,6 @@ function* save({ payload }) {
   }
 }
 
-function* remove({ payload }) {
-  yield call(api.remove, payload.candidateId);
-  yield put(ac.removeSuccess(payload.candidateId));
-}
-
-function* fetchList() {
-  const candidates = yield call(api.fetchList);
-  yield put(ac.fetchListSuccess(candidates));
-}
-
 function* fetch({ payload }) {
   const candidate = yield call(api.fetch, payload.candidateId);
   yield put(ac.fetchSuccess(candidate));
@@ -30,8 +20,6 @@ function* fetch({ payload }) {
 
 function* mySaga() {
   yield takeEvery(actions.CANDIDATE_SAVE, save);
-  yield takeEvery(actions.CANDIDATE_REMOVE, remove);
-  yield takeEvery(actions.CANDIDATE_FETCH_LIST, fetchList);
   yield takeEvery(actions.CANDIDATE_FETCH, fetch);
 }
 

@@ -14,7 +14,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import FilterPanel from './filter';
-import ac from '../actions';
+import ac from './actions';
 import styles from './assets/styles.css';
 
 
