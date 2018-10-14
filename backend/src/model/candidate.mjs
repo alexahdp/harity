@@ -33,6 +33,15 @@ const Candidate = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  skills: {
+    type: [String],
+    default: [],
+  },
+  level: {
+    type: String,
+    default: 'none',
+  },
+
   contacts: {
     phone: {
       type: String,
@@ -54,10 +63,6 @@ const Candidate = new mongoose.Schema({
       unique: true,
       trim: true,
     },
-    level: {
-      type: Number,
-    },
-    experienceTags: [String],
   },
 });
 

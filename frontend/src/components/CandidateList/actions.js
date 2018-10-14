@@ -3,6 +3,7 @@ import ga from '../../helpers/genAction';
 
 export const actions = {
   SET_FILTER: ga('SET_FILTER'),
+  RESET_FILTERS: ga('RESET_FILTERS'),
 
   CANDIDATE_FETCH_LIST: ga('CANDIDATE_FETCH_LIST'),
   CANDIDATE_FETCH_LIST_SUCCESS: ga('CANDIDATE_FETCH_LIST_SUCCESS'),
@@ -18,6 +19,7 @@ export const actions = {
 
 export default {
   setFilter: ca(actions.SET_FILTER, (key, value) => ({ key, value })),
+  resetFilters: ca(actions.RESET_FILTERS),
 
   fetchList: ca(actions.CANDIDATE_FETCH_LIST),
   fetchListSuccess: ca(actions.CANDIDATE_FETCH_LIST_SUCCESS, candidates => ({ candidates })),

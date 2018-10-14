@@ -44,7 +44,7 @@ function Panel(props) {
 Panel.propTypes = {
   show: PropTypes.bool,
   classes: PropTypes.shape({
-    paperAnchorLeft: PropTypes.object.isRequired,
+    paperAnchorLeft: PropTypes.string.isRequired,
   }).isRequired,
 };
 

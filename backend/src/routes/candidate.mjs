@@ -9,7 +9,7 @@ const attrs = [
   'middleName',
   'lastName',
   'description',
-  'experienceTags',
+  'skills',
 ];
 
 // атрибуты, которые уходят на клиент из БД
@@ -22,7 +22,8 @@ const publicAttrs = [
   'lastName',
   'description',
   'createdAt',
-  'experienceTags',
+  'skills',
+  'level',
 ];
 
 export default {

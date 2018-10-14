@@ -76,10 +76,37 @@ CandidateList.propTypes = {
 
 const ContainerCandidateList = compose(
   connect(
-    state => ({
-      candidates: state.getIn(['candidates', 'list']),
-      isShownFilterPanel: state.getIn(['candidates', 'isShownFilterPanel']),
-    }),
+    state => {
+      const skills = state.getIn(['candidates', 'filters', 'skills']);
+      const sex = state.getIn(['candidates', 'filters', 'sex']);
+      const level = state.getIn(['candidates', 'filters', 'level']);
+
+      const candidates = state.getIn(['candidates', 'list'])
+        .filter(candidate => {
+          if (sex.get('value') !== 'none' && candidate.get('sex') !== sex.get('value')) {
+            return false;
+          }
+
+          if (level.get('value') !== 'none' && candidate.get('level') !== level.get('value')) {
+            return false;
+          }
+
+          if (skills.size > 0) {
+            const hasSkill = skills.some(skill => candidate.get('skills').some(candidateSkill => (
+              candidateSkill === skill.get('value')
+            )));
+
+            if (!hasSkill) return false;
+          }
+
+          return true;
+        });
+
+      return {
+        candidates,
+        isShownFilterPanel: state.getIn(['candidates', 'isShownFilterPanel']),
+      };
+    },
     {
       fetchCandidates: ac.fetchList,
       hideFilterPanel: ac.hideFilterPanel,

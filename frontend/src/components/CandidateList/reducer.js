@@ -2,17 +2,46 @@ import Immutable, { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 import { actions } from './actions';
 
+const sexOptions = [
+  { label: 'None', value: 'none' },
+  { label: 'Male', value: 'male' },
+  { label: 'Female', value: 'female' },
+];
+
+const levelOptions = [
+  { label: 'None', value: 'none' },
+  { label: 'Junior', value: 'junior' },
+  { label: 'Middle', value: 'middle' },
+  { label: 'Senior', value: 'senior' },
+  { label: 'Senior-Fullstak', value: 'seniorfullstack' },
+  { label: 'TeamLead', value: 'teamlead' },
+];
+
+const skillsOptions = [
+  { label: 'nodejs', value: 'nodejs' },
+  { label: 'php', value: 'php' },
+  { label: 'java', value: 'java' },
+  { label: 'mysql', value: 'mysql' },
+  { label: 'mongodb', value: 'mongodb' },
+  { label: 'git', value: 'git' },
+  { label: 'perl', value: 'perl' },
+];
+
 const initialState = {
   isShownFilterPanel: false,
   list: [],
-  filters: {
-    skills: [],
-    sex: null,
+
+  filterOptions: {
+    sex: sexOptions,
+    level: levelOptions,
+    skills: skillsOptions,
   },
-  availableSkills: [
-    'nodejs', 'php', 'perl', 'c++', 'java',
-    'mongodb', 'mysql',
-  ],
+
+  filters: {
+    level: levelOptions[0],
+    skills: [],
+    sex: sexOptions[0],
+  },
 };
 
 export default handleActions(
@@ -39,6 +68,12 @@ export default handleActions(
         ['filters', action.payload.key],
         action.payload.value,
       );
+    },
+    [actions.RESET_FILTERS](state) {
+      return state
+        .setIn(['filters', 'skills'], Immutable.List([]))
+        .setIn(['filters', 'level'], Immutable.Map(levelOptions[0]))
+        .setIn(['filters', 'sex'], Immutable.Map(sexOptions[0]));
     },
   },
   Immutable.fromJS(initialState),
