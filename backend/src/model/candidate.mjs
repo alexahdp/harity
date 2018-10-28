@@ -6,11 +6,6 @@ const Candidate = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  middleName: {
-    type: String,
-    default: '',
-    trim: true,
-  },
   lastName: {
     type: String,
     required: true,
@@ -18,11 +13,11 @@ const Candidate = new mongoose.Schema({
   },
   sex: {
     type: String,
-    enum: ['male', 'female'],
-    default: null,
+    enum: ['none', 'male', 'female'],
+    default: 'none',
   },
   birthYear: {
-    type: Number,
+    type: Date,
     default: null,
   },
   description: {
@@ -46,22 +41,30 @@ const Candidate = new mongoose.Schema({
     phone: {
       type: String,
       unique: true,
+      sparse: true,
       trim: true,
+      set: v => v ? v : undefined,
     },
     email: {
       type: String,
       unique: true,
+      sparse: true,
       trim: true,
+      set: v => v ? v : undefined,
     },
     skype: {
       type: String,
       unique: true,
+      sparse: true,
       trim: true,
+      set: v => v ? v : undefined,
     },
     github: {
       type: String,
       unique: true,
+      sparse: true,
       trim: true,
+      set: v => v ? v : undefined,
     },
   },
 });

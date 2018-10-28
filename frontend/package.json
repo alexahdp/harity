@@ -10,7 +10,7 @@
     "lint": "npx eslint --ext .js src"
   },
   "dependencies": {
-    "@material-ui/core": "^3.0.1",
+    "@material-ui/core": "^3.2.1",
     "@material-ui/icons": "^3.0.1",
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",

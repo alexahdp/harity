@@ -9,6 +9,9 @@ export const actions = {
   CANDIDATE_SAVE_SUCCESS: ga('CANDIDATE_SAVE_SUCCESS'),
 
   CANDIDATE_SET_PROP: ga('CANDIDATE_SET_PROP'),
+
+  CANDIDATE_SAVE_SHOW_ERROR: ga('CANDIDATE_SAVE_SHOW_ERROR'),
+  CANDIDATE_SAVE_HIDE_ERROR: ga('CANDIDATE_SAVE_HIDE_ERROR'),
 };
 
 export default {
@@ -19,4 +22,7 @@ export default {
   saveSuccess: ca(actions.CANDIDATE_SAVE_SUCCESS, candidate => ({ candidate })),
 
   setProperty: ca(actions.CANDIDATE_SET_PROP, (property, value) => ({ property, value })),
+
+  showError: ca(actions.CANDIDATE_SAVE_SHOW_ERROR),
+  hideError: ca(actions.CANDIDATE_SAVE_HIDE_ERROR),
 };

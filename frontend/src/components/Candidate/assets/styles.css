@@ -1,0 +1,10 @@
+.caption {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: '#333';
+}
+
+.formControl {
+  margin-right: 40px !important;
+  min-width: 250px !important;
+}

@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
-import InputLabel from '@material-ui/core/InputLabel';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import SmartSelect from 'react-select';
 import ac from './actions';
+import Alert from '../Alert';
+import styles from './assets/styles.css';
 
 const candidateScheme = Yup.object().shape({
   firstName: Yup.string()
@@ -21,19 +21,11 @@ const candidateScheme = Yup.object().shape({
     .min(2, 'Too short')
     .max(100, 'Too long'),
 
-  middleName: Yup.string()
-    .min(2, 'Too short')
-    .trim()
-    .max(100, 'Too long'),
-
   lastName: Yup.string()
     .required('Required')
     .trim()
     .min(2, 'Too short')
     .max(100, 'Too long'),
-
-  sex: Yup.string()
-    .oneOf([null, 'male', 'frmale']),
 
   contacts: Yup.object().shape({
     email: Yup.string()
@@ -42,8 +34,11 @@ const candidateScheme = Yup.object().shape({
 
     phone: Yup.string()
       // .phone('Invalid email')
-      .matches(/^\+?[\d\s]+$/, 'Incorrect phone number')
-      .lowercase(),
+      .lowercase()
+      .matches(/^\+?[\d\s]+$/, {
+        message: 'Incorrect phone number',
+        excludeEmptyString: true,
+      }),
 
     skype: Yup.string()
       .lowercase('lowercase'),
@@ -53,6 +48,13 @@ const candidateScheme = Yup.object().shape({
 function Candidate(props) {
   return (
     <Grid container justify="center">
+      {props.errorAlertVisible && <Alert
+        show={true}
+        onClose={props.hideErrorAlert}
+        message="Ошибка при сохранении!"
+        variant="error"
+      />}
+
       <Formik
         enableReinitialize={true}
           initialValues={props.candidate.toJS()}
@@ -70,14 +72,27 @@ function Candidate(props) {
             // handleBlur,
             handleChange,
             handleSubmit,
+            setFieldValue,
             // isSubmitting,
           }) => (
             <Fragment>
-
               <Grid item md={4}>
                 <Grid item md={8}>
                   <h4>Name</h4>
                 </Grid>
+
+                <Grid item md={8}>
+                  <TextField
+                    name="lastName"
+                    value={values.lastName}
+                    onChange={handleChange}
+                    label="Last Name"
+                    margin="normal"
+                    fullWidth={true}
+                  />
+                  {errors.lastName && touched.lastName && <div>{errors.lastName}</div>}
+                </Grid>
+
                 <Grid item md={8}>
                   <TextField
                     name="firstName"
@@ -89,27 +104,55 @@ function Candidate(props) {
                   />
                   {errors.firstName && touched.firstName && <div>{errors.firstName}</div>}
                 </Grid>
+
                 <Grid item md={8}>
                   <TextField
-                    name="middleName"
-                    value={values.middleName}
+                    name="birthYear"
+                    value={values.birthYear}
                     onChange={handleChange}
-                    label="Middle Name"
+                    label="Birth Year"
                     margin="normal"
                     fullWidth={true}
                   />
-                  {errors.middleName && touched.middleName && <div>{errors.middleName}</div>}
+                  {errors.birthYear && touched.birthYear && <div>{errors.birthYear}</div>}
                 </Grid>
+
                 <Grid item md={8}>
-                  <TextField
-                    name="lastName"
-                    value={values.lastName}
-                    onChange={handleChange}
-                    label="Last Name"
-                    margin="normal"
-                    fullWidth={true}
+                  <div className={styles.caption}>Sex</div>
+                  <SmartSelect
+                    name="sex"
+                    value={values.sex}
+                    options={props.sexOptions}
+                    onChange={value => setFieldValue('sex', value)}
                   />
-                  {errors.lastName && touched.lastName && <div>{errors.lastName}</div>}
+                </Grid>
+
+                <Grid item md={8}>
+                  <div className={styles.caption}>Level</div>
+                  <FormControl className={styles.formControl}>
+                    <SmartSelect
+                      name="level"
+                      value={values.level}
+                      options={props.levelOptions}
+                      onChange={value => setFieldValue('level', value)}
+                    />
+                    {errors.level && touched.level && <div>{errors.level}</div>}
+                  </FormControl>
+                </Grid>
+
+                <Grid item md={8}>
+                  <div className={styles.caption}>Skills</div>
+                  <FormControl className={styles.formControl}>
+                    <SmartSelect
+                      name="skills"
+                      isMulti={true}
+                      isSearchable={true}
+                      value={values.skills}
+                      options={props.skillsOptions}
+                      onChange={value => setFieldValue('skills', value)}
+                    />
+                    {errors.skills && touched.skills && <div>{errors.skills}</div>}
+                  </FormControl>
                 </Grid>
               </Grid>
 
@@ -129,6 +172,7 @@ function Candidate(props) {
                   />
                   {errors.email && touched.email && <div>{errors.email}</div>}
                 </Grid>
+
                 <Grid item md={8}>
                   <TextField
                     name="phone"
@@ -140,6 +184,7 @@ function Candidate(props) {
                   />
                   {errors.phone && touched.phone && <div>{errors.phone}</div>}
                 </Grid>
+
                 <Grid item md={8}>
                   <TextField
                     name="skype"
@@ -151,55 +196,29 @@ function Candidate(props) {
                   />
                   {errors.skype && touched.skype && <div>{errors.skype}</div>}
                 </Grid>
-              </Grid>
 
-              <Grid item md={8}>
-                <TextField
-                  name="birthYear"
-                  value={values.birthYear}
-                  onChange={handleChange}
-                  label="Birth Year"
-                  margin="normal"
-                />
-                {errors.birthYear && touched.birthYear && <div>{errors.birthYear}</div>}
-              </Grid>
-
-              <Grid item md={8}>
-                <TextField
-                  name="description"
-                  value={values.description}
-                  onChange={handleChange}
-                  label="Description"
-                  margin="normal"
-                  multiline
-                  rows={4}
-                  rowsMax={8}
-                />
-                {errors.description && touched.description && <div>{errors.description}</div>}
-              </Grid>
-
-              <Grid item md={8}>
-                <FormControl>
-                  <InputLabel htmlFor="level-select">Level</InputLabel>
-                  <Select
-                    name="level"
+                <Grid item md={8}>
+                  <TextField
+                    name="description"
+                    value={values.description}
                     onChange={handleChange}
-                    value={values.level}
-                    inputProps={{
-                      name: 'level',
-                      id: 'level-select',
-                    }}
-                  >
-                    <MenuItem value="none">None</MenuItem>
-                    <MenuItem value="junior">Junior</MenuItem>
-                    <MenuItem value="middle">Middle</MenuItem>
-                    <MenuItem value="senior">Seior</MenuItem>
-                  </Select>
-                  {errors.level && touched.level && <div>{errors.level}</div>}
-                </FormControl>
+                    label="Description"
+                    margin="normal"
+                    variant="outlined"
+                    multiline
+                    fullWidth={true}
+                    rows={4}
+                    rowsMax={8}
+                  />
+                  {errors.description && touched.description && <div>{errors.description}</div>}
+                </Grid>
               </Grid>
 
-              <Grid item md={8} justify="flex-end" style={{ display: 'flex' }}>
+              <Grid
+                container
+                justify="flex-end"
+                style={{ display: 'flex' }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -217,19 +236,29 @@ function Candidate(props) {
 
 Candidate.propTypes = {
   candidate: PropTypes.instanceOf(Immutable.Map).isRequired,
+  errorAlertVisible: PropTypes.bool.isRequired,
+  hideErrorAlert: PropTypes.func.isRequired,
+  levelOptions: PropTypes.instanceOf(Immutable.List).isRequired,
   save: PropTypes.func.isRequired,
+  sexOptions: PropTypes.instanceOf(Immutable.List).isRequired,
+  skillsOptions: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 const ContainerCandidate = compose(
   connect(
     state => ({
       candidate: state.getIn(['candidate', 'currentCandidate']),
+      levelOptions: state.getIn(['candidates', 'filterOptions', 'level']).toJS(),
+      skillsOptions: state.getIn(['candidates', 'filterOptions', 'skills']).toJS(),
+      sexOptions: state.getIn(['candidates', 'filterOptions', 'sex']).toJS(),
+      errorAlertVisible: state.getIn(['candidates', 'errorAlertVisible']),
     }),
     {
       save: ac.save,
       setProperty: ac.setProperty,
       fetchList: ac.fetchList,
       getCandidate: ac.fetch,
+      hideErrorAlert: ac.hideErrorAlert,
     },
   ),
   lifecycle({

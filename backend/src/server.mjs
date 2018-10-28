@@ -2,7 +2,6 @@ import Koa from 'koa';
 import cors from '@koa/cors';
 import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
-import mongoose from 'mongoose';
 import logger from 'koa-logger';
 import session from 'koa-session';
 
@@ -11,18 +10,6 @@ import user from './routes/user';
 import question from './routes/question';
 import interviewPlan from './routes/interviewPlan';
 import candidate from './routes/candidate';
-
-mongoose.connect(conf.db.url);
-
-const db = mongoose.connection;
-db.on('error', (err) => {
-  console.log('Connect database error');
-  console.log(err);
-});
-db.once('open', () => {
-  console.log('Connect databse success');
-});
-
 
 const app = new Koa();
 const router = new Router();

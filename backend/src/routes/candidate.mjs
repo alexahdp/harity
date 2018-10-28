@@ -6,7 +6,6 @@ const attrs = [
   'email',
   'sex',
   'firstName',
-  'middleName',
   'lastName',
   'description',
   'skills',
@@ -18,7 +17,6 @@ const publicAttrs = [
   'sex',
   'contacts',
   'firstName',
-  'middleName',
   'lastName',
   'description',
   'createdAt',
@@ -59,7 +57,19 @@ export default {
   async create(ctx) {
     const candidate = new Candidate(_.pick(ctx.request.body, attrs));
 
-    candidate.validate();
+    try {
+      await candidate.validate();
+    } catch(err) {
+      if (err.name === 'ValidationError') {
+        ctx.status = 422;
+        return ctx.body = {
+          message: 'Validation error',
+          error: err.message,
+        };
+      } else {
+        throw err;
+      }
+    }
 
     await candidate.save();
     ctx.body = _.pick(candidate.toObject(), publicAttrs);
