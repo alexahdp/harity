@@ -4,6 +4,7 @@ import Router from 'koa-router';
 import BodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 import session from 'koa-session';
+import './model/db';
 
 import conf from './config/appconf';
 import user from './routes/user';

@@ -12,7 +12,7 @@ db.on('error', (err) => {
   console.log(err);
 });
 db.once('open', () => {
-  // console.log('Connect databse success');
+  console.log('Connect databse success');
 });
 
 export default db;
