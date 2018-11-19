@@ -16,7 +16,7 @@ services:
     command: npm run start
     network_mode: "host"
     volumes:
-      - ./frontend_react:/usr/src/harity/frontend
+      - ./frontend:/usr/src/harity/frontend
     working_dir: /usr/src/harity/frontend
   mongo:
     image: mongo:latest
