@@ -6,18 +6,21 @@ import Grid from '@material-ui/core/Grid';
 import ac from './actions';
 import QuestionList from './List';
 import QuestionForm from './Form';
+import Loading from '../Loading';
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchQuestions();
   }
 
-  propTypes = {
+  static propTypes = {
     addQuestion: PropTypes.func.isRequired,
     editQuestion: PropTypes.instanceOf(Immutable.Map).isRequired,
     fetchQuestions: PropTypes.func.isRequired,
     setEditQuestion: PropTypes.func.isRequired,
     questions: PropTypes.instanceOf(Immutable.List).isRequired,
+    questionsFetched: PropTypes.bool.isRequired,
+    questionsFetchError: PropTypes.bool.isRequired,
     removeQuestion: PropTypes.func.isRequired,
     updateQuestion: PropTypes.func.isRequired,
   }
@@ -44,11 +47,16 @@ class App extends Component {
 
         <Grid item xs={4}>
           <h2>Questions List</h2>
-          <QuestionList
-            questions={this.props.questions}
-            editHandle={this.props.setEditQuestion}
-            removeHandle={this.props.removeQuestion}
-          />
+          <Loading
+            isLoading={!this.props.questionsFetched}
+            loadError={this.props.questionsFetchError}
+          >
+            <QuestionList
+              questions={this.props.questions}
+              editHandle={this.props.setEditQuestion}
+              removeHandle={this.props.removeQuestion}
+            />
+          </Loading>
         </Grid>
       </Grid>
     );
@@ -58,6 +66,8 @@ class App extends Component {
 const ContainerApp = connect(
   state => ({
     questions: state.getIn(['questions', 'questionList']),
+    questionsFetched: state.getIn(['questions', 'questionsFetched']),
+    questionsFetchError: state.getIn(['questions', 'questionsFetchError']),
     editQuestion: state.getIn(['questions', 'editQuestion']),
   }),
   {

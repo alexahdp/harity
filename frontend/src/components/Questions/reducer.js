@@ -6,7 +6,7 @@ const questions = handleActions({
   [actions.QUESTIONS_FETCHED](state, action) {
     return state
       .set('questionList', Immutable.fromJS(action.payload.questions))
-      .set('questionFetched', true);
+      .set('questionsFetched', true);
   },
 
   [actions.ADD_QUESTION_SUCCESS](state, action) {
@@ -46,7 +46,8 @@ const questions = handleActions({
   },
 },
 Immutable.fromJS({
-  questionFetched: false,
+  questionsFetched: false,
+  questionsFetchError: false,
   questionList: [],
   editQuestion: {
     _id: null,
