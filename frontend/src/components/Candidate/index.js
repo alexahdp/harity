@@ -46,6 +46,11 @@ const candidateScheme = Yup.object().shape({
 });
 
 function Candidate(props) {
+  const candidate = props.candidate.toJS();
+  candidate.sex = props.sexMap.get(candidate.sex).toJS();
+  candidate.level = props.levelMap.get(candidate.level).toJS();
+  candidate.skills = candidate.skills.map(v => ({ value: v, label: v}));
+
   return (
     <Grid container justify="center">
       {props.errorAlertVisible && <Alert
@@ -57,12 +62,17 @@ function Candidate(props) {
 
       <Formik
         enableReinitialize={true}
-          initialValues={props.candidate.toJS()}
+          initialValues={candidate}
           validationSchema={candidateScheme}
           onSubmit={values => {
             props.save({
               _id: props.candidate.get('_id'),
-              ...values,
+              firstName: values.firstName,
+              lastName: values.lastName,
+              description: values.description,
+              sex: values.sex.value,
+              level: values.level.value,
+              skills: values.skills.map(v => v.value),
             });
           }}
           render={({
@@ -249,8 +259,10 @@ const ContainerCandidate = compose(
     state => ({
       candidate: state.getIn(['candidate', 'currentCandidate']),
       levelOptions: state.getIn(['candidates', 'filterOptions', 'level']).toJS(),
+      levelMap: state.getIn(['candidates', 'filterOptions', 'levelMap']),
       skillsOptions: state.getIn(['candidates', 'filterOptions', 'skills']).toJS(),
       sexOptions: state.getIn(['candidates', 'filterOptions', 'sex']).toJS(),
+      sexMap: state.getIn(['candidates', 'filterOptions', 'sexMap']),
       errorAlertVisible: state.getIn(['candidates', 'errorAlertVisible']),
     }),
     {

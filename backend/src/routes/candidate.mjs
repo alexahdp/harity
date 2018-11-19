@@ -9,6 +9,7 @@ const attrs = [
   'lastName',
   'description',
   'skills',
+  'level',
 ];
 
 // атрибуты, которые уходят на клиент из БД
@@ -42,10 +43,10 @@ export default {
       return;
     }
 
-    Object.assign(candidate, _.pick(ctx.request.body, ['']));
+    Object.assign(candidate, _.pick(ctx.request.body, attrs));
 
     await candidate.save();
-    ctx.body = _.pick(candidate.toObject(), []);
+    ctx.body = _.pick(candidate.toObject(), publicAttrs);
   },
 
   async delete(ctx) {

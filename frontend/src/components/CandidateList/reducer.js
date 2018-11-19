@@ -33,7 +33,9 @@ const initialState = {
 
   filterOptions: {
     sex: sexOptions,
+    sexMap: sexOptions.reduce((o, option) => ({...o, [option.value]: option}), {}),
     level: levelOptions,
+    levelMap: levelOptions.reduce((o, option) => ({...o, [option.value]: option}), {}),
     skills: skillsOptions,
   },
 
