@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import QuestionList from './List';
 import QuestionForm from './Form';
 import Loading from '../Loading';
 
-class App extends Component {
+class App extends PureComponent {
   componentDidMount() {
     this.props.fetchQuestions();
   }
