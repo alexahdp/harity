@@ -52,7 +52,9 @@ export default handleActions(
     [actions.CANDIDATE_REMOVE_SUCCESS](state, action) {
       return state.update(
         'list',
-        candidates => candidates.filter(candidate => candidate.get('_id') === action.payload.candidateId),
+        candidates => candidates.filter(candidate => {
+          return candidate.get('_id') !== action.payload.candidateId;
+        })
       );
     },
 
