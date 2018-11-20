@@ -4,7 +4,7 @@ import {
 import ac, { actions } from './actions';
 import api from './api';
 
-function* fetchQuestions() {
+export function* fetchQuestions() {
   const state = yield select();
 
   let questions;
@@ -20,7 +20,7 @@ function* fetchQuestions() {
   });
 }
 
-function* addQuestion({ payload }) {
+export function* addQuestion({ payload }) {
   const { question } = payload;
   const savedQuestion = yield call(api.save, question);
 
@@ -29,7 +29,7 @@ function* addQuestion({ payload }) {
   yield put(ac.clearEditQuestion());
 }
 
-function* updateQuestion({ payload }) {
+export function* updateQuestion({ payload }) {
   const { question } = payload;
   const savedQuestion = yield call(api.save, question);
 
@@ -38,7 +38,7 @@ function* updateQuestion({ payload }) {
   yield put(ac.clearEditQuestion());
 }
 
-function* removeQuestion({ payload }) {
+export function* removeQuestion({ payload }) {
   yield call(api.remove, payload.questionId);
 
   yield put(ac.removeQuestionSuccess(payload.questionId));
